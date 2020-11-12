@@ -1,3 +1,25 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #!/usr/bin/env python3
 
 """
@@ -133,7 +155,7 @@ class PCA9685:
             return -1
 
         new_servo = max_servo.MAXServo(self.servo_id, leg_type, joint_type, stand_angle, rest_angle)
-        print("Added a new ", leg_type, ", ", joint_type, " servo.")
+        print("Added a new", leg_type, joint_type, "servo.")
         self.servo_id += 1
         return new_servo
 
@@ -142,5 +164,5 @@ class PCA9685:
             print("ERROR: Unable to add a new servo.")
             return -1
 
-        print("Added a new ", servo.get_legtype(), ", ", servo.get_jointtype(), " servo.")
+        print("Added a new", servo.get_legtype(), servo.get_jointtype(), "servo.")
         self.servo_id += 1
