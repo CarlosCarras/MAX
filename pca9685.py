@@ -4,7 +4,7 @@
 filename: pca9685.py
 author:   Carlos Carrasquillo
 created:  October 24, 2020
-modified: October 24, 2020
+modified: November 14, 2020
 project:  MAX
 
 purpose:  This file writes to the PCA9685 PWM controller.
@@ -18,7 +18,6 @@ https://github.com/adafruit/Adafruit_Python_PCA9685/blob/master/Adafruit_PCA9685
 from smbus2 import SMBus
 import time
 import math
-import max_servo
 
 
 class PCA9685:

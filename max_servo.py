@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 
+"""
+filename: max_servo.py
+author:   Carlos Carrasquillo
+created:  October 23, 2020
+modified: November 14, 2020
+project:  MAX
+
+purpose:  This file reads accelerometer and gyroscope data from the Invensense MPU6050 IMU over I2C.
+
+datasheet: https://components101.com/motors/mg996r-servo-motor-datasheet
+"""
+
 import pca9685
 
 MG996R_MIN_PWM = 1500
@@ -21,9 +33,6 @@ class MAXServo:
         self.max_pwm = MG996R_MAX_PWM
         self.min_angle = MG996R_MIN_ANGLE
         self.max_angle = MG996R_MAX_ANGLE
-
-        self.conv_slope = (self.max_pwm - self.min_pwm) / (self.max_angle - self.min_angle)
-        self.conv_intercept = self.max_pwm - self.conv_slope * self.max_angle
 
         self.allowable_error = 1                # deg
         self.goal_pose = self.stand_angle       # deg
@@ -53,7 +62,9 @@ class MAXServo:
             return -1.0
 
     def compute_pwm(self):
-        return round(self.current_pose*self.conv_slope + self.conv_intercept)
+        slope = (self.max_pwm - self.min_pwm) / (self.max_angle - self.min_angle)
+        intercept = self.max_pwm - slope * self.max_angle
+        return round(self.current_pose*slope + intercept)
 
     def set_pwm(self, pwm = None):
         if not pwm:

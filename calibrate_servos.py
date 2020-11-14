@@ -1,3 +1,15 @@
+#!/usr/bin/env python3
+
+"""
+filename: calibrate_servos.py
+author:   Carlos Carrasquillo
+created:  November 9, 2020
+modified: November 14, 2020
+project:  MAX
+
+purpose:  This file allows the user to test different angles for each of the servo channels.
+"""
+
 import max_servo
 import pca9685
 
@@ -46,7 +58,5 @@ def calibrate():
             print("Error: Invalid Servo Channel.")
         else:
             set_angle(channel)
-
-calibrate()
 
 

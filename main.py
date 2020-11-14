@@ -23,14 +23,7 @@ def add_servo(channel, stand_angle, rest_angle) -> object:
 
 
 def main():
-    print("hello world!")
-
-    FR_knee = add_servo(1, 120, 80)
-    RR_knee = add_servo(2, 120, 80)
-    FL_knee = add_servo(3, 120, 80)
-    RL_knee = add_servo(4, 120, 80)
-
-
-
+    print("...Initializing MAX...")
+    calibrate_servos.calibrate()
 
 main()
