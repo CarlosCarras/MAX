@@ -1,25 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #!/usr/bin/env python3
 
 """
@@ -141,28 +119,13 @@ class PCA9685:
     # sets the pulse length in seconds
     # e.g. set_servo_pulse(0, 0.001) is a ~1 millisecond pulse width
 
-    def set_pulse(self, servo, pulse):
+    def set_servo_pulse(self, channel, pulse):
         pulse_length = 1000000      # 1,000,000 us per second
         pulse_length //= 60         # 60 Hz
         pulse_length //= 4096       # 12 bits of resolution
         pulse *= 1000
         pulse //= pulse_length
-        self.set_pwm(servo.get_channel(), 0, pulse)
+        self.set_pwm(channel, 0, pulse)
 
-    def add_servo(self, leg_type, joint_type, stand_angle, rest_angle) -> object:
-        if (self.servo_id) > 15:                            # check to make sure the PCA9685 can support another servo
-            print("ERROR: Unable to add a new servo.")
-            return -1
-
-        new_servo = max_servo.MAXServo(self.servo_id, leg_type, joint_type, stand_angle, rest_angle)
-        print("Added a new", leg_type, joint_type, "servo.")
-        self.servo_id += 1
-        return new_servo
-
-    def attach_servo(self, servo):
-        if self.servo_id > 15:                            # check to make sure the PCA9685 can support another servo
-            print("ERROR: Unable to add a new servo.")
-            return -1
-
-        print("Added a new", servo.get_legtype(), servo.get_jointtype(), "servo.")
-        self.servo_id += 1
+    def set_servo_pwm(self, channel, off):
+        self.set_pwm(channel, 0, off)

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import pca9685
+
 MG996R_MIN_PWM = 1500
 MG996R_MAX_PWM = 2500
 MG996R_MIN_ANGLE = 0.0
@@ -8,12 +10,12 @@ MG996R_MAX_ANGLE = 180.0
 
 class MAXServo:
 
-    def __init__(self, channel, leg_type, joint_type, stand_angle, rest_angle):
+    def __init__(self, channel, type, stand_angle=60.0, rest_angle=60.0):
         self.channel = channel
         self.stand_angle = stand_angle
         self.rest_angle = rest_angle
-        self.leg_type = leg_type
-        self.joint_type = joint_type
+        self.leg_type = type.split(' ')[0]
+        self.joint_type = type.split(' ')[1]
 
         self.min_pwm = MG996R_MIN_PWM
         self.max_pwm = MG996R_MAX_PWM
@@ -30,6 +32,7 @@ class MAXServo:
         self.delay = 0.001                      # seconds
 
         self.set_pwm()
+        self.controller = pca9685.PCA9685()
 
     def get_channel(self):
         return self.channel
@@ -55,18 +58,18 @@ class MAXServo:
     def set_pwm(self, pwm = None):
         if not pwm:
             pwm = self.compute_pwm()
+        self.controller.set_servo_pwm(self.channel, pwm)
 
-        #servo.write(pwm)
-        #last_actuated = millis();
+    def set_goal(self, goal):
+        self.goal_pose = goal
 
-    def get_pwm(self):
-        if not self.goal_pose:
-            return
+    def get_goal(self):
+        return self.goal_pose
 
+    def update(self):
         if not self.goal_reached():
             self.current_pose += self.get_direction() * self.delay * self.desired_speed
         else:
             self.current_pose = self.goal_pose
-
         self.set_pwm()
 
