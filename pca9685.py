@@ -59,9 +59,7 @@ class PCA9685:
         mode1 = mode1 & ~self.MODE1_SLEEP                           # bitmask to disable sleep mode
         self.bus.write_byte_data(self.address, self.MODE1, mode1)   # wakes up the 16-channel, 12-bit PWM controller (pp. 15)
         time.sleep(self.sleep_dur)                                  #  waiting 500 us for oscillator
-
-        self.servo_id = 0                                           # used to assign a channel to every initialized servo
-
+        print('PCA9585 controller initialized.')
 
     #----------------------------- I2C  Utilites -----------------------------#
 
@@ -82,7 +80,6 @@ class PCA9685:
         # writes the high and low bytes from consecutive registers
         self.bus.write_byte_data(self.address, register, low)
         self.bus.write_byte_data(self.address, register+1, high)
-
 
     # ----------------------------- PWM Control ------------------------------#
 
@@ -112,7 +109,6 @@ class PCA9685:
     def set_all_pwm(self, on, off):
         self.write_i2c_word(self.ALL_LED_ON0, on)
         self.write_i2c_word(self.ALL_LED_OFF0, off)
-
 
     # ---------------------------- Servo Control -----------------------------#
     # sets the pulse length in seconds
