@@ -59,7 +59,6 @@ class PCA9685:
         mode1 = mode1 & ~self.MODE1_SLEEP                           # bitmask to disable sleep mode
         self.bus.write_byte_data(self.address, self.MODE1, mode1)   # wakes up the 16-channel, 12-bit PWM controller (pp. 15)
         time.sleep(self.sleep_dur)                                  #  waiting 500 us for oscillator
-        print('PCA9585 controller initialized.')
 
     #----------------------------- I2C  Utilites -----------------------------#
 
