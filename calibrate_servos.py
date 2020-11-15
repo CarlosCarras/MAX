@@ -24,7 +24,7 @@ def set_pulse(channel):
     servo = max_servo.MAXServo(channel, motor_type)
 
     while True:
-        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PULSE) + ", " + max_servo.MG996R_MAX_PULSE + "]: ";
+        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PULSE) + ", " + str(max_servo.MG996R_MAX_PULSE) + "]: "
         command = input(out_str)
         if command == "q":
             print('\n')
@@ -44,7 +44,7 @@ def calibrate():
     print('-------------------------------------------------------------\n')
 
     while True:
-        command = input("Enter Servo Channel [1-16]: ")
+        command = input("Enter Servo Channel [0-15]: ")
         if command == "q":
             break
 
