@@ -35,7 +35,7 @@ def set_pulse(channel):
             print("Error: Invalid Servo PWM.")
         else:
             #servo.set_goal(angle)
-            servo.controller.set_servo_pulse()
+            servo.controller.set_servo_pulse(servo.channel, pulse)
 
 
 def calibrate():
