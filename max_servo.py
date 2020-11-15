@@ -40,8 +40,9 @@ class MAXServo:
         self.desired_speed = 0.0                # deg/sec
         self.delay = 0.001                      # seconds
 
-        self.set_pwm()
         self.controller = pca9685.PCA9685()
+        print('Controller should have been initialized...')
+        self.set_pwm()
 
     def get_channel(self):
         return self.channel
