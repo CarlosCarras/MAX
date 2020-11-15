@@ -24,9 +24,7 @@ def set_angle(channel):
     print("---------------- Tuning the", motors[channel - 1], "angle. -----------------")
 
     motor_type = motors[channel]
-    leg_type = motor_type.split(' ')[0]
-    joint_type = motor_type.split(' ')[1]
-    servo = max_servo.MAXServo(channel, leg_type, joint_type)
+    servo = max_servo.MAXServo(channel, motor_type)
 
     while True:
         command = input("Select an angle [0 -180]: ")
