@@ -11,14 +11,11 @@ purpose:  This file allows the user to test different angles for each of the ser
 """
 
 import max_servo
-import pca9685
 
 motors = ["FR Knee", "FR Hip", "FR AB/AD",
           "FL Knee", "FL Hip", "FL AB/AD",
           "RR Knee", "RR Hip", "RR AB/AD",
           "RL Knee", "RL Hip", "RL AB/AD"]
-
-controller = pca9685.PCA9685()
 
 def set_angle(channel):
     print("---------------- Tuning the", motors[channel - 1], "angle. -----------------")
