@@ -14,8 +14,8 @@ datasheet: https://components101.com/motors/mg996r-servo-motor-datasheet
 
 import pca9685
 
-MG996R_MIN_PULSE = 1500
-MG996R_MAX_PULSE = 2500
+MG996R_MIN_PULSE = 2000
+MG996R_MAX_PULSE = 2700
 MG996R_MIN_ANGLE = 0.0
 MG996R_MAX_ANGLE = 180.0
 
