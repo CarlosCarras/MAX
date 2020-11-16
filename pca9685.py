@@ -59,6 +59,8 @@ class PCA9685:
         mode1 = mode1 & ~self.MODE1_SLEEP                           # bitmask to disable sleep mode
         self.bus.write_byte_data(self.address, self.MODE1, mode1)   # wakes up the 16-channel, 12-bit PWM controller (pp. 15)
         time.sleep(self.sleep_dur)                                  #  waiting 500 us for oscillator
+        
+        self.set_pwm_freq(60)
 
     #----------------------------- I2C  Utilites -----------------------------#
 
@@ -119,7 +121,6 @@ class PCA9685:
         pulse_length //= 4096       # 12 bits of resolution
         pulse *= 1000
         pulse //= pulse_length
-        print(str(pulse))
         self.set_pwm(channel, 0, int(pulse))
 
     def set_servo_pwm(self, channel, off):
