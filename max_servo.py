@@ -12,8 +12,6 @@ purpose:  This file reads accelerometer and gyroscope data from the Invensense M
 datasheet: https://components101.com/motors/mg996r-servo-motor-datasheet
 """
 
-import pca9685
-
 MG996R_MIN_PWM = 90
 MG996R_MAX_PWM = 670
 MG996R_MIN_PULSE = 1999.5
@@ -23,7 +21,7 @@ MG996R_MAX_ANGLE = 225
 
 class MAXServo:
 
-    def __init__(self, channel, type, stand_angle=120.0, rest_angle=120.0):
+    def __init__(self, controller, channel, type, stand_angle=120.0, rest_angle=120.0):
         self.channel = channel
         self.stand_angle = stand_angle
         self.rest_angle = rest_angle
@@ -43,7 +41,7 @@ class MAXServo:
         self.desired_speed = 90.0               # deg/sec
         self.delay = 0.001                      # seconds
 
-        self.controller = pca9685.PCA9685()
+        self.controller = controller
         self.set_pwm()
 
     def get_channel(self):
@@ -86,11 +84,16 @@ class MAXServo:
     def rest(self):
         self.set_goal(self.rest_angle)
 
-    def update(self):
+    def clk(self):
         if not self.goal_reached():
             self.current_pose += self.get_direction() * self.delay * self.desired_speed
         else:
             self.current_pose = self.goal_pose
         self.set_pwm()
 
-
+    def update(self):
+        if not self.goal_reached():
+            self.clk()
+        else:
+            for i in range(10):
+                self.clk()

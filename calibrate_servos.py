@@ -25,12 +25,12 @@ def set_pulse(controller, channel):
             print('\n')
             return
 
-        pwm = float(command)
-        if pwm < max_servo.MG996R_MIN_PWM or pwm > max_servo.MG996R_MAX_PWM:
-            print("Error: Invalid Servo PWM.")
+        angle = float(command)
+        if angle < max_servo.MG996R_MIN_ANGLE or angle > max_servo.MG996R_MAX_ANGLE:
+            print("Error: Invalid Servo Angle.")
         else:
-            #servo.set_goal(angle)
-            controller.pwm.set_servo_pwm(channel, pwm)
+            controller.pwm.servos[channel].set_goal(angle)
+            controller.pwm.servos[channel].update()
 
 
 def calibrate(controller):

@@ -1,6 +1,7 @@
 from __future__ import division
 import motor_control
 import calibrate_servos
+import time
 
 LEGTYPE_FR = "FR"
 LEGTYPE_FL = "FR"
@@ -24,10 +25,11 @@ def main():
     initalize_servos(controller)
 
     controller.stand()
-    try:
-        while True:
-            controller.update()
-    except KeyboardInterrupt:
-        pass
+    controller.update()
+
+    time.sleep(10)
+
+    controller.rest()
+    controller.update()
 
 main()
