@@ -4,7 +4,7 @@
 filename: pca9685.py
 author:   Carlos Carrasquillo
 created:  October 24, 2020
-modified: November 14, 2020
+modified: November 22, 2020
 project:  MAX
 
 purpose:  This file writes to the PCA9685 PWM controller.
@@ -115,8 +115,8 @@ class PCA9685:
         self.write_i2c_word(self.ALL_LED_OFF0, off)
 
     # ---------------------------- Servo Control -----------------------------#
-    # sets the pulse length in seconds
-    # e.g. set_servo_pulse(0, 0.001) is a ~1 millisecond pulse width
+    # sets the pulse length in microseconds
+    # e.g. set_servo_pulse(0, 2000) is a ~2 millisecond pulse width
 
     def set_servo_pulse(self, channel, pulse):
         pulse_length = 1000000                          # 1,000,000 us per second

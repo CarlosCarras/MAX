@@ -19,7 +19,6 @@ MG996R_MAX_PULSE = 2600
 MG996R_MIN_ANGLE = 0.0
 MG996R_MAX_ANGLE = 180.0
 
-
 class MAXServo:
 
     def __init__(self, channel, type, stand_angle=60.0, rest_angle=60.0):
