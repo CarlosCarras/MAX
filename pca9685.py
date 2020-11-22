@@ -22,7 +22,7 @@ import math
 
 class PCA9685:
 
-    PCA9685_ADDR = 0x40
+    PCA9685_ADDR = 0x40 #0x52
     PCA9685_RESOLUTION = 12                                 # 12-bit resolution (4096 steps)
     PCA9685_OSCILLATOR_FREQ = 25000000.0                    # the internal oscillator of the PCA9685 is 25MHz (pp. 1)
     sleep_dur = 0.005                                       # general sleep duration (pp. 14)
