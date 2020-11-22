@@ -127,4 +127,4 @@ class PCA9685:
         self.set_pwm(channel, on=0, off=int(pulse))
 
     def set_servo_pwm(self, channel, off):
-        self.set_pwm(channel, 0, off)
+        self.set_pwm(channel, 0, int(off))
