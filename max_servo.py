@@ -14,10 +14,12 @@ datasheet: https://components101.com/motors/mg996r-servo-motor-datasheet
 
 import pca9685
 
-MG996R_MIN_PULSE = 0#1999.1
-MG996R_MAX_PULSE = 10000000#2001.8
+MG996R_MIN_PWM = 90
+MG996R_MAX_PWM = 670
+MG996R_MIN_PULSE = 1999.5
+MG996R_MAX_PULSE = 2001.5
 MG996R_MIN_ANGLE = 0.0
-MG996R_MAX_ANGLE = 180.0
+MG996R_MAX_ANGLE = 225
 
 class MAXServo:
 
@@ -28,6 +30,8 @@ class MAXServo:
         self.leg_type = type.split(' ')[0]
         self.joint_type = type.split(' ')[1]
 
+        self.min_pwm = MG996R_MIN_PWM
+        self.max_pwm = MG996R_MAX_PWM
         self.min_pulse = MG996R_MIN_PULSE
         self.max_pulse = MG996R_MAX_PULSE
         self.min_angle = MG996R_MIN_ANGLE
@@ -61,8 +65,8 @@ class MAXServo:
             return -1.0
 
     def compute_pwm(self):
-        slope = (self.max_pulse - self.min_pulse) / (self.max_angle - self.min_angle)
-        intercept = self.max_pulse - slope * self.max_angle
+        slope = (self.max_pwm - self.min_pwm) / (self.max_angle - self.min_angle)
+        intercept = self.max_pwm - slope * self.max_angle
         return round(self.current_pose*slope + intercept)
 
     def set_pwm(self, pwm = None):

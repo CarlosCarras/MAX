@@ -20,18 +20,18 @@ def set_pulse(controller, channel):
     motor_type = controller.motors[channel]
 
     while True:
-        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PULSE) + ", " + str(max_servo.MG996R_MAX_PULSE) + "]: "
+        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PWM) + ", " + str(max_servo.MG996R_MAX_PWM) + "]: "
         command = input(out_str)
         if command == "q":
             print('\n')
             return
 
         pulse = float(command)
-        if pulse < max_servo.MG996R_MIN_PULSE or pulse > max_servo.MG996R_MAX_PULSE:
+        if pulse < max_servo.MG996R_MIN_PWM or pulse > max_servo.MG996R_MAX_PWM:
             print("Error: Invalid Servo PWM.")
         else:
             #servo.set_goal(angle)
-            controller.actuate(channel, pulse)
+            controller.pwm.set_servo_pwm(channel, pwm)
 
 
 def calibrate():
