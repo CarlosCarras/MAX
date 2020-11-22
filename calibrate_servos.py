@@ -17,7 +17,7 @@ def set_pulse(controller, channel):
     print("---------------- Tuning the", controller.motors[channel], "angle. -----------------")
 
     while True:
-        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_ANGLE) + ", " + str(max_servo.MG996R_MAX_ANGLE) + "]: "
+        out_str = "Select an angle [" + str(max_servo.MG996R_MIN_ANGLE) + ", " + str(max_servo.MG996R_MAX_ANGLE) + "]: "
         command = input(out_str)
         if command == "q":
             print('\n')

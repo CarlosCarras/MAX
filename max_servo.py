@@ -92,8 +92,7 @@ class MAXServo:
         self.set_pwm()
 
     def update(self):
-        if not self.goal_reached():
+        while not self.goal_reached():
             self.clk()
-        else:
-            for i in range(10):
-                self.clk()
+        for i in range(10):
+            self.clk()
