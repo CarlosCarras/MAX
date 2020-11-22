@@ -54,6 +54,6 @@ def calibrate():
         if channel < 0 or channel > 15:
             print("Error: Invalid Servo Channel.")
         else:
-            set_pulse(controller, channel)
+            set_pulse(controller=controller, channel=channel)
 
 

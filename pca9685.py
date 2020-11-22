@@ -120,11 +120,11 @@ class PCA9685:
 
     def set_servo_pulse(self, channel, pulse):
         pulse_length = 1000000                          # 1,000,000 us per second
-        pulse_length //=  self.freq                     # 60 Hz
+        pulse_length //= self.freq                      # 60 Hz
         pulse_length //= 2**self.PCA9685_RESOLUTION     # 12 bits of resolution
         pulse *= 1000
         pulse //= pulse_length
-        self.set_pwm(channel, 0, int(pulse))
+        self.set_pwm(channel, on=0, off=int(pulse))
 
     def set_servo_pwm(self, channel, off):
         self.set_pwm(channel, 0, off)
