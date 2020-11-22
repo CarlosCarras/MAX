@@ -41,4 +41,3 @@ class Controller:
 
     def actuate(self, channel, pulse):
         self.pwm.set_servo_pulse(channel, pulse)
-
