@@ -18,11 +18,10 @@ motors = ["FR Knee", "FR Hip", "FR AB/AD",
           "RR Knee", "RR Hip", "RR AB/AD",
           "RL Knee", "RL Hip", "RL AB/AD"]
 
-def set_pulse(channel):
-    print("---------------- Tuning the", motors[channel - 1], "angle. -----------------")
+def set_pulse(controller, channel):
+    print("---------------- Tuning the", motors[channel], "angle. -----------------")
 
     motor_type = motors[channel]
-    controller = pca9685.PCA9685()
 
     while True:
         out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PULSE) + ", " + str(max_servo.MG996R_MAX_PULSE) + "]: "
@@ -44,6 +43,8 @@ def calibrate():
     print('                  Entering Calibration Mode                  ')
     print('-------------------------------------------------------------\n')
 
+    controller = pca9685.PCA9685()
+
     while True:
         command = input("Enter Servo Channel [0-15]: ")
         if command == "q":
@@ -53,6 +54,6 @@ def calibrate():
         if channel < 0 or channel > 15:
             print("Error: Invalid Servo Channel.")
         else:
-            set_pulse(channel)
+            set_pulse(controller, channel)
 
 
