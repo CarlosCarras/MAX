@@ -1,5 +1,5 @@
 from __future__ import division
-import max_servo
+import motor_control
 import calibrate_servos
 
 LEGTYPE_FR = "FR"
@@ -15,9 +15,19 @@ def initalize_servos(controller):
     for i in range(12):
         controller.attach_servo()
 
+
 def main():
     print("...Initializing MAX...")
-    calibrate_servos.calibrate()
 
+    controller = motor_control.Controller()
+    calibrate_servos.calibrate(controller)
+    initalize_servos(controller)
+
+    controller.stand()
+    try:
+        while True:
+            controller.update()
+    except KeyboardInterrupt:
+        pass
 
 main()

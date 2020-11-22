@@ -40,7 +40,7 @@ class MAXServo:
         self.allowable_error = 1                # deg
         self.goal_pose = self.stand_angle       # deg
         self.current_pose = self.stand_angle    # deg
-        self.desired_speed = 0.0                # deg/sec
+        self.desired_speed = 90.0               # deg/sec
         self.delay = 0.001                      # seconds
 
         self.controller = pca9685.PCA9685()
@@ -69,7 +69,7 @@ class MAXServo:
         intercept = self.max_pwm - slope * self.max_angle
         return round(self.current_pose*slope + intercept)
 
-    def set_pwm(self, pwm = None):
+    def set_pwm(self, pwm=None):
         if not pwm:
             pwm = self.compute_pwm()
         self.controller.set_servo_pwm(self.channel, pwm)
@@ -80,14 +80,17 @@ class MAXServo:
     def get_goal(self):
         return self.goal_pose
 
+    def stand(self):
+        self.set_goal(self.stand_angle)
+
+    def rest(self):
+        self.set_goal(self.rest_angle)
+
     def update(self):
         if not self.goal_reached():
             self.current_pose += self.get_direction() * self.delay * self.desired_speed
         else:
             self.current_pose = self.goal_pose
         self.set_pwm()
-
-    def pulse2angle(self):
-        return
 
 

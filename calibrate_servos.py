@@ -10,7 +10,6 @@ project:  MAX
 purpose:  This file allows the user to test different angles for each of the servo channels.
 """
 
-import motor_control
 import max_servo
 
 
@@ -34,12 +33,10 @@ def set_pulse(controller, channel):
             controller.pwm.set_servo_pwm(channel, pwm)
 
 
-def calibrate():
+def calibrate(controller):
     print('-------------------------------------------------------------')
     print('                  Entering Calibration Mode                  ')
     print('-------------------------------------------------------------\n')
-
-    controller = motor_control.Controller()
 
     while True:
         command = input("Enter Servo Channel [0-15]: ")

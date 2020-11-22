@@ -36,9 +36,22 @@ class Controller:
         self.num_servos += 1
         out_str = "Succesfully added the" + self.motors[channel] + "servo"
         print(out_str)
+        return self.servos[self.num_servos-1]
 
     def get_num_servos(self):
         return self.num_servos
 
     def actuate(self, channel, pulse):
         self.pwm.set_pwm(channel, 0, pulse)
+
+    def stand(self):
+        for i in range(self.num_servos):
+            self.servos[i].stand()
+
+    def rest(self):
+        for i in range(self.num_servos):
+            self.servos[i].rest()
+
+    def update(self):
+        for i in range(self.num_servos):
+            self.servos[i].update()
