@@ -40,4 +40,4 @@ class Controller:
         return self.num_servos
 
     def actuate(self, channel, pulse):
-        self.pwm.set_servo_pulse(channel, pulse)
+        self.pwm.set_pwm(channel, 0, pulse)

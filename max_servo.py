@@ -14,8 +14,8 @@ datasheet: https://components101.com/motors/mg996r-servo-motor-datasheet
 
 import pca9685
 
-MG996R_MIN_PULSE = 1999.1
-MG996R_MAX_PULSE = 20001.8
+MG996R_MIN_PULSE = 0#1999.1
+MG996R_MAX_PULSE = 10000000#2001.8
 MG996R_MIN_ANGLE = 0.0
 MG996R_MAX_ANGLE = 180.0
 
@@ -82,4 +82,7 @@ class MAXServo:
         else:
             self.current_pose = self.goal_pose
         self.set_pwm()
+
+    def pulse2angle(self):
+
 
