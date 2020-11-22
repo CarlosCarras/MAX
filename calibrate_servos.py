@@ -31,7 +31,7 @@ def set_pulse(controller, channel):
             print("Error: Invalid Servo PWM.")
         else:
             #servo.set_goal(angle)
-            controller.actuate(channel, pulse)
+            controller.pwm.set_servo_pwm(channel, pulse)
 
 
 def calibrate():

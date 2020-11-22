@@ -24,17 +24,20 @@ class Controller:
         self.servos = []
         self.num_servos = 0
 
-    def attach_servo(self, channel=None):
+    def attach_servo(self, stand_angle=120, rest_angle=120, channel=None):
         if not channel:
             channel = self.num_servos
         elif channel > self.num_servos:
             print("Error: The servo channel exceeds the current number of servos.")
             return
 
-        self.servos.insert(channel, MAXServo(channel, self.motors[channel]))
+        self.servos.insert(channel, MAXServo(channel, self.motors[channel], stand_angle, rest_angle))
         self.num_servos += 1
         out_str = "Succesfully added the" + self.motors[channel] + "servo"
         print(out_str)
+
+    def get_num_servos(self):
+        return self.num_servos
 
     def actuate(self, channel, pulse):
         self.pwm.set_servo_pulse(channel, pulse)

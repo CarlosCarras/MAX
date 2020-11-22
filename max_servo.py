@@ -21,7 +21,7 @@ MG996R_MAX_ANGLE = 180.0
 
 class MAXServo:
 
-    def __init__(self, channel, type, stand_angle=60.0, rest_angle=60.0):
+    def __init__(self, channel, type, stand_angle=120.0, rest_angle=120.0):
         self.channel = channel
         self.stand_angle = stand_angle
         self.rest_angle = rest_angle
