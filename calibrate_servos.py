@@ -10,6 +10,7 @@ project:  MAX
 purpose:  This file allows the user to test different angles for each of the servo channels.
 """
 
+import pca9685
 import max_servo
 
 motors = ["FR Knee", "FR Hip", "FR AB/AD",
@@ -21,7 +22,7 @@ def set_pulse(channel):
     print("---------------- Tuning the", motors[channel - 1], "angle. -----------------")
 
     motor_type = motors[channel]
-    servo = max_servo.MAXServo(channel, motor_type)
+    controller = pca9685.PCA9685()
 
     while True:
         out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PULSE) + ", " + str(max_servo.MG996R_MAX_PULSE) + "]: "
@@ -35,7 +36,7 @@ def set_pulse(channel):
             print("Error: Invalid Servo PWM.")
         else:
             #servo.set_goal(angle)
-            servo.controller.set_servo_pulse(servo.channel, pulse)
+            controller.set_servo_pulse(channel, pulse)
 
 
 def calibrate():
