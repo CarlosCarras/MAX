@@ -26,8 +26,8 @@ def set_pulse(controller, channel):
             print('\n')
             return
 
-        pulse = float(command)
-        if pulse < max_servo.MG996R_MIN_PWM or pulse > max_servo.MG996R_MAX_PWM:
+        pwm = float(command)
+        if pwm < max_servo.MG996R_MIN_PWM or pwm > max_servo.MG996R_MAX_PWM:
             print("Error: Invalid Servo PWM.")
         else:
             #servo.set_goal(angle)

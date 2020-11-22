@@ -25,7 +25,7 @@ class Controller:
         self.servos = []
         self.num_servos = 0
 
-    def attach_servo(self, stand_angle=120, rest_angle=120, channel=None):
+    def attach_servo(self, stand_angle=90, rest_angle=90, channel=None):
         if not channel:
             channel = self.num_servos
         elif channel > self.num_servos:
