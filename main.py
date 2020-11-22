@@ -15,7 +15,7 @@ JOINTTYPE_KNEE = "KNEE"
 
 def initialize_servos(controller):
     for i in range(12):
-        controller.attach_servo()
+        controller.attach_servo(stand_angle=145, rest_angle=225)
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
     controller.stand()
     controller.update()
 
-    time.sleep(10)
+    time.sleep(5)
 
     controller.rest()
     controller.update()
