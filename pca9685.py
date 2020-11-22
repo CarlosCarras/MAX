@@ -15,6 +15,7 @@ discloure: This code was modeled after Tony DiCola (Adafruit Industries) PCA9685
 https://github.com/adafruit/Adafruit_Python_PCA9685/blob/master/Adafruit_PCA9685/PCA9685.py
 """
 
+from __future__ import division
 from smbus2 import SMBus
 import time
 import math
@@ -22,7 +23,7 @@ import math
 
 class PCA9685:
 
-    PCA9685_ADDR = 0x40
+    PCA9685_ADDR = 0x40                                     # 52 for my custom PCB
     PCA9685_RESOLUTION = 12                                 # 12-bit resolution (4096 steps)
     PCA9685_OSCILLATOR_FREQ = 25000000.0                    # the internal oscillator of the PCA9685 is 25MHz (pp. 1)
     sleep_dur = 0.005                                       # general sleep duration (pp. 14)
@@ -47,7 +48,7 @@ class PCA9685:
     MODE2_OUTDRV  = 1 << 2
 
 
-    def __init__(self, bus=1, address=PCA9685_ADDR):
+    def __init__(self, address=PCA9685_ADDR, bus=1):
         self.address = address
         self.bus = SMBus(bus)
 
@@ -59,7 +60,8 @@ class PCA9685:
         mode1 = mode1 & ~self.MODE1_SLEEP                           # bitmask to disable sleep mode
         self.bus.write_byte_data(self.address, self.MODE1, mode1)   # wakes up the 16-channel, 12-bit PWM controller (pp. 15)
         time.sleep(self.sleep_dur)                                  #  waiting 500 us for oscillator
-        
+
+        self.freq = 0
         self.set_pwm_freq(60)
 
     #----------------------------- I2C  Utilites -----------------------------#
@@ -87,7 +89,7 @@ class PCA9685:
     def set_pwm_freq(self, freq_hz):
         # computing the appropriate register value for a Hz input (pp. 14)
         prescale_val = self.PCA9685_OSCILLATOR_FREQ
-        prescale_val /= self.PCA9685_RESOLUTION
+        prescale_val /= 2**self.PCA9685_RESOLUTION
         prescale_val /= float(freq_hz)
         prescale_val -= 1.0
         prescaler = int(math.floor(prescale_val + 0.5))
@@ -103,6 +105,8 @@ class PCA9685:
         time.sleep(self.sleep_dur)
         self.bus.write_byte_data(self.address, self.MODE1, mode1 | self.MODE1_RESTART)
 
+        self.freq = freq_hz
+
     def set_pwm(self, channel, on, off):
         self.write_i2c_word(self.LED0_ON0 + 4*channel, on)
         self.write_i2c_word(self.LED0_OFF0 + 4*channel, off)
@@ -116,9 +120,9 @@ class PCA9685:
     # e.g. set_servo_pulse(0, 0.001) is a ~1 millisecond pulse width
 
     def set_servo_pulse(self, channel, pulse):
-        pulse_length = 1000000      # 1,000,000 us per second
-        pulse_length //= 60         # 60 Hz
-        pulse_length //= 4096       # 12 bits of resolution
+        pulse_length = 1000000                          # 1,000,000 us per second
+        pulse_length //=  self.freq                     # 60 Hz
+        pulse_length //= 2**self.PCA9685_RESOLUTION     # 12 bits of resolution
         pulse *= 1000
         pulse //= pulse_length
         self.set_pwm(channel, 0, int(pulse))
