@@ -84,5 +84,6 @@ class MAXServo:
         self.set_pwm()
 
     def pulse2angle(self):
+        return
 
 
