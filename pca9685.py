@@ -22,7 +22,6 @@ import math
 
 
 class PCA9685:
-
     PCA9685_ADDR = 0x40                                     # 52 for my custom PCB
     PCA9685_RESOLUTION = 12                                 # 12-bit resolution (4096 steps)
     PCA9685_OSCILLATOR_FREQ = 25000000.0                    # the internal oscillator of the PCA9685 is 25MHz (pp. 1)
