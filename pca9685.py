@@ -107,8 +107,8 @@ class PCA9685:
         self.freq = freq_hz
 
     def set_pwm(self, channel, on, off):
-        self.write_i2c_word(self.LED0_ON0 + 4*channel, on)
-        self.write_i2c_word(self.LED0_OFF0 + 4*channel, off)
+        self.write_i2c_word(self.LED0_ON0 + 4*channel, int(on))
+        self.write_i2c_word(self.LED0_OFF0 + 4*channel, int(off))
 
     def set_all_pwm(self, on, off):
         self.write_i2c_word(self.ALL_LED_ON0, on)
