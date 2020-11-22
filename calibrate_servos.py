@@ -16,10 +16,8 @@ import max_servo
 def set_pulse(controller, channel):
     print("---------------- Tuning the", controller.motors[channel], "angle. -----------------")
 
-    motor_type = controller.motors[channel]
-
     while True:
-        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_PWM) + ", " + str(max_servo.MG996R_MAX_PWM) + "]: "
+        out_str = "Select a pulse [" + str(max_servo.MG996R_MIN_ANGLE) + ", " + str(max_servo.MG996R_MAX_ANGLE) + "]: "
         command = input(out_str)
         if command == "q":
             print('\n')
@@ -29,8 +27,8 @@ def set_pulse(controller, channel):
         if angle < max_servo.MG996R_MIN_ANGLE or angle > max_servo.MG996R_MAX_ANGLE:
             print("Error: Invalid Servo Angle.")
         else:
-            controller.pwm.servos[channel].set_goal(angle)
-            controller.pwm.servos[channel].update()
+            controller.servos[channel].set_goal(angle)
+            controller.servos[channel].update()
 
 
 def calibrate(controller):
@@ -47,6 +45,6 @@ def calibrate(controller):
         if channel < 0 or channel > 15:
             print("Error: Invalid Servo Channel.")
         else:
-            set_pulse(controller=controller, channel=channel)
+            set_pulse(controller, channel)
 
 

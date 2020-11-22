@@ -20,11 +20,6 @@ class Controller:
               "RR Knee", "RR Hip", "RR AB/AD",
               "RL Knee", "RL Hip", "RL AB/AD"]
 
-    stand_command = "stand"
-    rest_command = "rest"
-    clk_command = "clk"
-    update_command = "update"
-
     def __init__(self):
         self.pwm = pca9685.PCA9685()
         self.servos = []

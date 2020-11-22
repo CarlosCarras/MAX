@@ -21,8 +21,9 @@ def main():
     print("...Initializing MAX...")
 
     controller = motor_control.Controller()
-    calibrate_servos.calibrate(controller)
     initalize_servos(controller)
+
+    calibrate_servos.calibrate(controller)
 
     controller.stand()
     controller.update()
