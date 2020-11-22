@@ -13,6 +13,7 @@ purpose:  This file oversees the operation of all of the servo motors in MAX.
 import pca9685
 from max_servo import MAXServo
 
+
 class Controller:
     motors = ["FR Knee", "FR Hip", "FR AB/AD",
               "FL Knee", "FL Hip", "FL AB/AD",
@@ -32,7 +33,7 @@ class Controller:
             print("Error: The servo channel exceeds the current number of servos.")
             return
 
-        self.servos.insert(channel, MAXServo(self.pwm, self.motors[channel], stand_angle, rest_angle))
+        self.servos.insert(channel, MAXServo(self.pwm, channel, self.motors[channel], stand_angle, rest_angle))
         self.num_servos += 1
         out_str = "Succesfully added the " + self.motors[channel] + " servo!"
         print(out_str)
@@ -59,5 +60,3 @@ class Controller:
     def update(self):
         for i in range(self.num_servos):
             self.servos[i].update()
-
-

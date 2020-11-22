@@ -12,7 +12,8 @@ JOINTTYPE_ABAD = "AB/AD"
 JOINTTYPE_HIP = "HIP"
 JOINTTYPE_KNEE = "KNEE"
 
-def initalize_servos(controller):
+
+def initialize_servos(controller):
     for i in range(12):
         controller.attach_servo()
 
@@ -21,7 +22,7 @@ def main():
     print("...Initializing MAX...")
 
     controller = motor_control.Controller()
-    initalize_servos(controller)
+    initialize_servos(controller)
 
     calibrate_servos.calibrate(controller)
 
@@ -32,5 +33,6 @@ def main():
 
     controller.rest()
     controller.update()
+
 
 main()
