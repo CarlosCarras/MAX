@@ -7,6 +7,8 @@ created:  October 24, 2020
 modified: October 24, 2020
 project:  MAX
 
+
+
 purpose:  Solves the inverse kinematics for each of the robot's legs.
 
 reference paper: https://www.researchgate.net/publication/320307716_Inverse_Kinematic_Analysis_Of_A_Quadruped_Rob
@@ -27,8 +29,9 @@ nomenclature:
     - theta[3]: angle of knee joint
 
 NOTE: the coordinate system used in the attached article is different. the ground coordinate system for this project is:
-    - Z: up
-    - Y: into the page
+
+
+     - Y: into the page
     - X: Y cross Z
 """
 
