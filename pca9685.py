@@ -6,7 +6,6 @@ author:   Carlos Carrasquillo
 created:  October 24, 2020
 modified: November 22, 2020
 project:  MAX
-
 purpose:  This file writes to the PCA9685 PWM controller.
 
 datasheet: NXP Semiconductors, PCA9685 Datasheet, Rev. 4

@@ -21,12 +21,20 @@ class Controller:
               "RR Knee", "RR Hip", "RR AB/AD",
               "RL Knee", "RL Hip", "RL AB/AD"]
 
+    stand_angles = [120.0, 120.0, 120.0,
+                    120.0, 120.0, 120.0,
+                    120.0, 120.0, 120.0]
+
+    rest_angles = [225.0, 225.0, 225.0,
+                   225.0, 225.0, 225.0,
+                   225.0, 225.0, 225.0]
+
     def __init__(self):
         self.pwm = pca9685.PCA9685()
         self.servos = []
         self.num_servos = 0
 
-    def attach_servo(self, stand_angle=90, rest_angle=90, channel=None):
+    def attach_servo(self, stand_angle=120, rest_angle=120, channel=None):
         if not channel:
             channel = self.num_servos
         elif channel > self.num_servos:
@@ -45,14 +53,6 @@ class Controller:
     def actuate(self, channel, pulse):
         self.pwm.set_pwm(channel, 0, pulse)
 
-    def stand(self):
-        for i in range(self.num_servos):
-            self.servos[i].stand()
-
-    def rest(self):
-        for i in range(self.num_servos):
-            self.servos[i].rest()
-
     def clk(self):
         for i in range(self.num_servos):
             self.servos[i].clk()
@@ -60,3 +60,13 @@ class Controller:
     def update(self):
         for i in range(self.num_servos):
             self.servos[i].update()
+
+    def stand(self):
+        for i in range(self.num_servos):
+            self.servos[i].stand()
+        self.update()
+
+    def rest(self):
+        for i in range(self.num_servos):
+            self.servos[i].rest()
+        self.update()

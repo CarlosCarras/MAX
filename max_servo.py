@@ -21,12 +21,11 @@ MG996R_MAX_ANGLE = 225
 
 class MAXServo:
 
-    def __init__(self, controller, channel, motor_type, stand_angle=120.0, rest_angle=120.0):
+    def __init__(self, controller, channel, motor_type, stand_angle, rest_angle):
         self.channel = channel
         self.stand_angle = stand_angle
         self.rest_angle = rest_angle
-        self.leg_type = motor_type.split(' ')[0]
-        self.joint_type = motor_type.split(' ')[1]
+        self.leg_type, self.joint_type = motor_type.split(' ')
 
         self.min_pwm = MG996R_MIN_PWM
         self.max_pwm = MG996R_MAX_PWM
