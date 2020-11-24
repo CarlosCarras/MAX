@@ -129,8 +129,7 @@ class AMG88XX:
             for col in range(0, self.AMG8833_PIXEL_ARRAY_WIDTH):
                 reg = row * self.AMG8833_PIXEL_ARRAY_HEIGHT + col
                 raw = self.read_bytes(reg, 2)
-                val = struct.unpack('<h', bytearray(raw))[0]
-                reading = (val[2] << 8) | val[1]
+                reading = raw[0] << 8 | raw[1]
                 pixels[row][col] = _twos_comp_to_float(reading) * self.AMG8833_PIXEL_TEMP_CONVERSION
 
         return pixels
