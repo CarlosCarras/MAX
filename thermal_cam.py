@@ -33,14 +33,17 @@ class THERMALCAM:
         self.amg8833 = amg88xx.AMG88XX()
         self.width = self.amg8833.AMG8833_PIXEL_ARRAY_WIDTH
         self.height = self.amg8833.AMG8833_PIXEL_ARRAY_HEIGHT
-        self.min_pixel_temp = self.amg8833.AMG8833_MIN_TEMP
-        self.max_pixel_temp = self.amg8833.AMG8833_MAX_TEMP
+        self.min_temp = self.amg8833.AMG8833_MIN_TEMP
+        self.max_temp = self.amg8833.AMG8833_MAX_TEMP
+        self.min_pixel_temp = 0
+        self.max_pixel_temp = 0
         self.current_min_pixel_temp = 0
         self.current_max_pixel_temp = 0
+
         self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
 
     def map_temp(self, val):
-        return (val - self.amg8833.AMG8833_MIN_TEMP) * (COLORDEPTH - 1) / (self.amg8833.AMG8833_MAX_TEMP - self.amg8833.AMG8833_MIN_TEMP)
+        return (val - self.min_temp) * (COLORDEPTH - 1) / (self.max_temp - self.min_temp)
 
 
     def print_temps(self, console_x, console_y, text, color):
@@ -51,15 +54,15 @@ class THERMALCAM:
     def show(self):
         pixels = self.amg8833.get_pixels()
 
-        self.current_max_pixel_temp = self.map_temp(pixels[1][1])
-        self.current_min_pixel_temp = self.current_max_pixel_temp
+        self.current_max_pixel_temp = 0
+        self.current_min_pixel_temp = 0
 
         y_console = 2
         for ix in range(self.height):
             x_console = 2
             for jx in range(self.width):
                 pixel = self.map_temp(pixels[ix][jx])
-                color_index = int(round((pixel - self.min_pixel_temp)))
+                color_index = int(round((pixel - self.current_min_pixel_temp)))
 
                 if color_index < 0:
                     color_index = 0
