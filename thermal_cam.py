@@ -21,9 +21,6 @@ import math
 from colour import Color
 import amg88xx
 
-
-MIN_TEMP = 26.0
-MAX_TEMP = 32.0
 COLORDEPTH = 1024
 
 COLORS = list(Color("indigo").range_to(Color("red"), COLORDEPTH))
@@ -36,14 +33,14 @@ class THERMALCAM:
         self.amg8833 = amg88xx.AMG88XX()
         self.width = self.amg8833.AMG8833_PIXEL_ARRAY_WIDTH
         self.height = self.amg8833.AMG8833_PIXEL_ARRAY_HEIGHT
-        self.min_pixel_temp = MIN_TEMP
-        self.max_pixel_temp = MAX_TEMP
+        self.min_pixel_temp = self.amg8833.AMG8833_MIN_TEMP
+        self.max_pixel_temp = self.amg8833.AMG8833_MAX_TEMP
         self.current_min_pixel_temp = 0
         self.current_max_pixel_temp = 0
         self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
 
     def map_temp(self, val):
-        return (val - self.current_min_pixel_temp) * (COLORDEPTH - 1) / (self.current_max_pixel_temp - self.current_min_pixel_temp)
+        return (val - self.amg8833.AMG8833_MIN_TEMP) * (COLORDEPTH - 1) / (self.amg8833.AMG8833_MAX_TEMP - self.amg8833.AMG8833_MIN_TEMP)
 
 
     def print_temps(self, console_x, console_y, text, color):
