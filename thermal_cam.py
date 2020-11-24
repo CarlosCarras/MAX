@@ -36,14 +36,14 @@ class THERMALCAM:
         self.amg8833 = amg88xx.AMG88XX()
         self.width = self.amg8833.AMG8833_PIXEL_ARRAY_WIDTH
         self.height = self.amg8833.AMG8833_PIXEL_ARRAY_HEIGHT
-        self.min_pixel_temp = 0
-        self.max_pixel_temp = 0
+        self.min_pixel_temp = MIN_TEMP
+        self.max_pixel_temp = MAX_TEMP
         self.current_min_pixel_temp = 0
         self.current_max_pixel_temp = 0
         self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
 
     def map_temp(self, val):
-        return (val - MIN_TEMP) * (COLORDEPTH - 1) / (MAX_TEMP - MIN_TEMP)
+        return (val - self.min_pixel_temp) * (COLORDEPTH - 1) / (self.max_pixel_temp - self.min_pixel_temp)
 
 
     def print_temps(self, console_x, console_y, text, color):
@@ -68,6 +68,7 @@ class THERMALCAM:
                     color_index = 0
                 if color_index > len(CONSOLE_COLORS) - 1:
                     color_index = len(CONSOLE_COLORS) - 1
+
                 self.print_temps(x_console, y_console * 2 - 2, "  ", CONSOLE_COLORS[color_index])
 
                 if pixel > self.current_max_pixel_temp:
