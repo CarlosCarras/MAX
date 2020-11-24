@@ -54,8 +54,8 @@ class THERMALCAM:
     def show(self):
         pixels = self.amg8833.get_pixels()
 
-        self.current_max_pixel_temp = 0
-        self.current_min_pixel_temp = 0
+        self.current_max_pixel_temp = self.map_temp(pixels[1][1])
+        self.current_min_pixel_temp = self.current_max_pixel_temp
 
         y_console = 2
         for ix in range(self.height):
