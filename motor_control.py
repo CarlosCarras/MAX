@@ -18,7 +18,6 @@ class Controller:
     motors = ["FR Knee", "FR Hip", "FR AB/AD",
               "FL Knee", "FL Hip", "FL AB/AD",
               "RR Knee", "RR Hip", "RR AB/AD",
-              "RR Knee", "RR Hip", "RR AB/AD",
               "RL Knee", "RL Hip", "RL AB/AD"]
 
     stand_angles = [120.0, 120.0, 120.0,
