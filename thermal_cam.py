@@ -33,8 +33,6 @@ CONSOLE_COLORS = [17, 18, 19, 20, 21, 57, 93, 129, 165, 201, 200, 199, 198, 197,
 class THERMALCAM:
 
     def __init__(self):
-        self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width*self.height)]
-
         self.amg8833 = amg88xx.AMG88XX()
         self.width = self.amg8833.AMG8833_PIXEL_ARRAY_WIDTH
         self.height = self.amg8833.AMG8833_PIXEL_ARRAY_HEIGHT
@@ -42,6 +40,7 @@ class THERMALCAM:
         self.max_pixel_temp = 0
         self.current_min_pixel_temp = 0
         self.current_max_pixel_temp = 0
+        self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
 
     def map_temp(self, val):
         return (val - MIN_TEMP) * (COLORDEPTH - 1) / (MAX_TEMP - MIN_TEMP)
