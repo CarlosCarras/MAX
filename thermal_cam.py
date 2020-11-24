@@ -61,7 +61,7 @@ class THERMALCAM:
         for ix in range(self.height):
             x_console = 2
             for jx in range(self.width):
-                pixel = self.map_temp(pixels[ix, jx])
+                pixel = self.map_temp(pixels[ix][jx])
                 color_index = int(round((pixel - self.min_pixel_temp)))
 
                 if color_index < 0:
