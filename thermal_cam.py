@@ -43,7 +43,7 @@ class THERMALCAM:
         self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
 
     def map_temp(self, val):
-        return (val - self.min_pixel_temp) * (COLORDEPTH - 1) / (self.max_pixel_temp - self.min_pixel_temp)
+        return (val - self.current_min_pixel_temp) * (COLORDEPTH - 1) / (self.current_max_pixel_temp - self.current_min_pixel_temp)
 
 
     def print_temps(self, console_x, console_y, text, color):

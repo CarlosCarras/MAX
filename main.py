@@ -36,7 +36,7 @@ def main():
 
     while(True):
         camera.show()
-        time.sleep(5)
+        time.sleep(0.1)
 
 
 main()
