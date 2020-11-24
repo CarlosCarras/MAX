@@ -52,28 +52,17 @@ class THERMALCAM:
         sys.stdout.write("\x1b7\x1b[%d;%df%s\x1b8" % (console_x, console_y, text))
 
     def get_mapping(self, pixels):
-        self.current_max_pixel_temp = 0
-        self.current_min_pixel_temp = 0
-
         for ix in range(self.height):
             for jx in range(self.width):
-                pixel = self.map_temp(pixels[ix][jx])
-                pixels[ix][jx] = pixel
-
-                if pixel > self.current_max_pixel_temp:
-                    self.current_min_pixel_temp = pixel
-                    if pixel > self.max_pixel_temp:
-                        self.max_pixel_temp = pixel
-                if pixel < self.current_min_pixel_temp:
-                    self.current_min_pixel_temp = pixel
-                    if pixel < self.min_pixel_temp:
-                        self.min_pixel_temp = pixel
-
+                pixels[ix][jx] = self.map_temp(pixels[ix][jx])
         return pixels
 
     def show(self):
         pixels = self.amg8833.get_pixels()
         pixels = self.get_mapping(pixels)
+
+        self.current_max_pixel_temp = 0
+        self.current_min_pixel_temp = 0
 
         y_console = 2
         for ix in range(self.height):
@@ -86,6 +75,15 @@ class THERMALCAM:
                     color_index = 0
                 if color_index > len(CONSOLE_COLORS) - 1:
                     color_index = len(CONSOLE_COLORS) - 1
+
+                if pixel > self.current_max_pixel_temp:
+                    self.current_min_pixel_temp = pixel
+                    if pixel > self.max_pixel_temp:
+                        self.max_pixel_temp = pixel
+                if pixel < self.current_min_pixel_temp:
+                    self.current_min_pixel_temp = pixel
+                    if pixel < self.min_pixel_temp:
+                        self.min_pixel_temp = pixel
 
                 self.print_temps(x_console, y_console * 2 - 2, "  ", CONSOLE_COLORS[color_index])
 
