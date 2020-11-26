@@ -27,7 +27,7 @@ COLORS = list(Color("indigo").range_to(Color("red"), COLORDEPTH))
 COLORS = [(int(c.red * 255), int(c.green * 255), int(c.blue * 255)) for c in COLORS]
 CONSOLE_COLORS = [17, 18, 19, 20, 21, 57, 93, 129, 165, 201, 200, 199, 198, 197, 196, 202, 208, 214, 220]
 
-class THERMALCAM:
+class ThermalCam:
 
     def __init__(self):
         self.amg8833 = amg88xx.AMG88XX()

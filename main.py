@@ -4,37 +4,39 @@ import calibrate_servos
 import thermal_cam
 import time
 
-LEGTYPE_FR = "FR"
-LEGTYPE_FL = "FR"
-LEGTYPE_RR = "RR"
-LEGTYPE_RL = "RL"
 
-JOINTTYPE_ABAD = "AB/AD"
-JOINTTYPE_HIP = "HIP"
-JOINTTYPE_KNEE = "KNEE"
+stand_angles = [155.0,  35.0, 110.0,
+                 50.0, 180.0,  55.0,
+                  0.0,   0.0,   0.0,
+                  0.0,   0.0,   0.0]
+
+rest_angles = [225.0,   0.0, 110.0,
+                 0.0, 220.0,  55.0,
+                 0.0,   0.0,   0.0,
+                 0.0,   0.0,   0.0]
 
 
 def initialize_servos(controller):
     for i in range(len(controller.motors)):
-        controller.attach_servo(controller.stand_angles[i], controller.rest_angles[i])
+        controller.attach_servo(stand_angles[i], rest_angles[i])
 
 
 def main():
     print("...Initializing MAX...")
 
-    camera = thermal_cam.THERMALCAM()
+    camera = thermal_cam.ThermalCam()
     controller = motor_control.Controller()
     initialize_servos(controller)
 
     calibrate_servos.calibrate(controller)
 
-    #controller.stand()
-    #controller.update()
-    #time.sleep(5)
-    #controller.rest()
-    #controller.update()
+    controller.stand()
+    controller.update()
+    time.sleep(5)
+    controller.rest()
+    controller.update()
 
-    while(True):
+    while False:
         camera.show()
         time.sleep(0.1)
 

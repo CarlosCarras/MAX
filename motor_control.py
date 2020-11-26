@@ -11,6 +11,7 @@ purpose:  This file oversees the operation of all of the servo motors in MAX.
 """
 
 import pca9685
+import gait_planner
 from max_servo import MAXServo
 
 
@@ -20,15 +21,6 @@ class Controller:
               "RR Knee", "RR Hip", "RR AB/AD",
               "RL Knee", "RL Hip", "RL AB/AD"]
 
-    stand_angles = [120.0, 120.0, 120.0,
-                    120.0, 120.0, 120.0,
-                    120.0, 120.0, 120.0,
-                    120.0, 120.0, 120.0]
-
-    rest_angles = [225.0, 225.0, 225.0,
-                   225.0, 225.0, 225.0,
-                   225.0, 225.0, 225.0,
-                   225.0, 225.0, 225.0]
 
     def __init__(self):
         self.pwm = pca9685.PCA9685()
