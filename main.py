@@ -32,7 +32,7 @@ def main():
 
     controller.stand()
     controller.update()
-    time.sleep(5)
+    time.sleep(25)
     controller.rest()
     controller.update()
 
