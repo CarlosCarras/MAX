@@ -30,10 +30,8 @@ class GaitPlanner():
     def step_trot(self, step_dir):
         if self.last_step == STEP_RIGHT:
             change = TROT_STEP_LEFT_POSE
-            self.last_step = STEP_LEFT
         else:
             change = TROT_STEP_RIGHT_POSE
-            self.last_step = STEP_RIGHT
 
         if step_dir == STEP_DOWN:
             change =  [i*-1 for i in change]
@@ -46,6 +44,11 @@ class GaitPlanner():
     def step(self):
         if time.time() - self.step_time < self.wait_time:
             return
+
+        if self.last_step == STEP_RIGHT:
+            self.last_step = STEP_LEFT
+        else:
+            self.last_step = STEP_RIGHT
 
         if self.gait is GAIT_TROT:
             self.step_trot(STEP_UP)
