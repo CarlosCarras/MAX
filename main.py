@@ -2,6 +2,7 @@ from __future__ import division
 import motor_control
 import calibrate_servos
 import thermal_cam
+import gait_planner
 import time
 
 
@@ -31,12 +32,13 @@ def main():
     calibrate_servos.calibrate(controller)
 
     controller.stand()
-    time.sleep(25)
+    time.sleep(5)
     #controller.rest()
 
-    while False:
-        camera.show()
-        time.sleep(0.1)
+    move = gait_planner.GaitPlanner(controller)
 
+    while True:
+        move.step()
+        time.sleep(2)
 
 main()
