@@ -44,7 +44,7 @@ class GaitPlanner():
 
         self.controller.change_pose(change)
         self.step_time = time.time()
-        print("step!")
+        print(change)
 
 
     def step(self):
