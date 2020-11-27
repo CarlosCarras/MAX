@@ -93,5 +93,4 @@ class MAXServo:
     def update(self):
         while not self.goal_reached():
             self.clk()
-        for i in range(10):
-            self.clk()
+        self.clk()
