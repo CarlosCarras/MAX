@@ -37,8 +37,8 @@ class GaitPlanner():
             change =  [i*-1 for i in change]
 
         self.controller.change_pose(change)
+        self.controller.update()
         self.step_time = time.time()
-        print(change)
 
 
     def step(self):
