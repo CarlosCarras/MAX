@@ -26,13 +26,13 @@ class gaitPlanner():
 
     def step_trot(self):
         if self.last_step == STEP_RIGHT:
-            pose = TROT_STEP_LEFT_POSE
+            change = TROT_STEP_LEFT_POSE
             self.last_step = STEP_LEFT
         else:
-            pose = TROT_STEP_RIGHT_POSE
+            change = TROT_STEP_RIGHT_POSE
             self.last_step = STEP_RIGHT
 
-        self.controller.set_pose(pose)
+        self.controller.change_pose(change)
         self.step_time = time.time()
 
 

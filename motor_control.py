@@ -73,3 +73,7 @@ class Controller:
         for i in range(self.num_servos):
             angles.append(self.servos[i].current_pose)
         return angles
+
+    def change_pose(self, changes):
+        for i in range(self.num_servos):
+            self.servos[i].set_goal(self.servos[i].get_goal() + changes[i])
