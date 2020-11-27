@@ -32,13 +32,13 @@ def main():
     calibrate_servos.calibrate(controller)
 
     controller.stand()
-    time.sleep(5)
+    time.sleep(3)
     #controller.rest()
 
     move = gait_planner.GaitPlanner(controller)
 
     while True:
         move.step()
-        time.sleep(2)
+        time.sleep(3)
 
 main()

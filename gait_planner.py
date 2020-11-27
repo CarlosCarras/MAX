@@ -44,6 +44,7 @@ class GaitPlanner():
 
         self.controller.change_pose(change)
         self.step_time = time.time()
+        print("step!")
 
 
     def step(self):
@@ -53,6 +54,5 @@ class GaitPlanner():
         if self.gait is GAIT_TROT:
             self.step_trot()
 
-            step_down = Timer(1.0, self.step_trot, )
-
+            step_down = Timer(1.0, self.step_trot)
             step_down.start()
