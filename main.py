@@ -31,10 +31,10 @@ def main():
     calibrate_servos.calibrate(controller)
 
     controller.stand()
-    controller.update()
+    controller.update_simultaneously()
     time.sleep(25)
     controller.rest()
-    controller.update()
+    controller.update_simultaneously()
 
     while False:
         camera.show()
