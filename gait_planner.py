@@ -18,7 +18,6 @@ class GaitPlanner():
         self.controller = controller
         self.gait = gait
         self.last_step = None
-        self.last_move = STEP_DOWN
         self.step_time = 0
         self.wait_time = wait_time      # in seconds
 
@@ -28,7 +27,7 @@ class GaitPlanner():
             self.gait = GAIT_TROT
 
 
-    def step_trot(self):
+    def step_trot(self, step_dir):
         if self.last_step == STEP_RIGHT:
             change = TROT_STEP_LEFT_POSE
             self.last_step = STEP_LEFT
@@ -36,11 +35,8 @@ class GaitPlanner():
             change = TROT_STEP_RIGHT_POSE
             self.last_step = STEP_RIGHT
 
-        if self.last_move == STEP_UP:
+        if step_dir == STEP_DOWN:
             change =  [i*-1 for i in change]
-            self.last_move = STEP_DOWN
-        else:
-            self.last_move = STEP_UP
 
         self.controller.change_pose(change)
         self.step_time = time.time()
@@ -52,7 +48,7 @@ class GaitPlanner():
             return
 
         if self.gait is GAIT_TROT:
-            self.step_trot()
+            self.step_trot(STEP_UP)
 
-            step_down = Timer(1.0, self.step_trot)
+            step_down = Timer(1.0, self.step_trot, STEP_DOWN)
             step_down.start()
