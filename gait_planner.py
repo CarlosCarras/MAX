@@ -10,7 +10,7 @@ STEP_DOWN = "D"
 
 
 TROT_STEP_RIGHT_POSE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-TROT_STEP_LEFT_POSE = [0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0]
+TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 
 
 class GaitPlanner():
