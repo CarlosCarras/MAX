@@ -10,6 +10,7 @@ project:  MAX
 purpose:  This file oversees the operation of all of the servo motors in MAX.
 """
 
+import numpy as np
 import pca9685
 import gait_planner
 from max_servo import MAXServo
@@ -50,19 +51,28 @@ class Controller:
         for i in range(self.num_servos):
             self.servos[i].clk()
 
-    def update(self):
+    def update_sequentially(self):
         for i in range(self.num_servos):
             self.servos[i].update()
+
+    def update_simultaneously(self):
+        updated = np.zeros((12, 1))
+        while np.min(updated) < 1:
+            for i in range(self.num_servos):
+                if not self.servos[i].goal_reached():
+                    self.servos[i].clk()
+                else:
+                    updated[i] = 1
 
     def stand(self):
         for i in range(self.num_servos):
             self.servos[i].stand()
-        self.update()
+        self.update_simultaneously()
 
     def rest(self):
         for i in range(self.num_servos):
             self.servos[i].rest()
-        self.update()
+        self.update_simultaneously()
 
     def set_pose(self, angles):
         for i in range(self.num_servos):
