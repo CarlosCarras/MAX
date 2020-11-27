@@ -58,6 +58,6 @@ class GaitPlanner():
 
     def dance(self, dur):
         start = time.time()
-        while time.time() - start > dur:
+        while time.time() - start < dur:
             self.step()
             time.sleep(0.5)
