@@ -51,7 +51,7 @@ class Controller:
         for i in range(self.num_servos):
             self.servos[i].clk()
 
-    def update_sequentially(self):
+    def update(self):
         for i in range(self.num_servos):
             self.servos[i].update()
 
@@ -67,12 +67,12 @@ class Controller:
     def stand(self):
         for i in range(self.num_servos):
             self.servos[i].stand()
-        self.update_simultaneously()
+        self.update()
 
     def rest(self):
         for i in range(self.num_servos):
             self.servos[i].rest()
-        self.update_simultaneously()
+        self.update()
 
     def set_pose(self, angles):
         for i in range(self.num_servos):
