@@ -32,7 +32,7 @@ def main():
 
     controller.stand()
     time.sleep(25)
-    controller.rest()
+    #controller.rest()
 
     while False:
         camera.show()
