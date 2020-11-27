@@ -39,6 +39,6 @@ def main():
 
     while True:
         move.step()
-        time.sleep(3)
+        time.sleep(5)
 
 main()

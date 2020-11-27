@@ -50,5 +50,5 @@ class GaitPlanner():
         if self.gait is GAIT_TROT:
             self.step_trot(STEP_UP)
 
-            step_down = Timer(1.0, self.step_trot, STEP_DOWN)
+            step_down = Timer(0.75, self.step_trot, STEP_DOWN)
             step_down.start()
