@@ -9,12 +9,12 @@ STEP_UP = "U"
 STEP_DOWN = "D"
 
 
-TROT_STEP_RIGHT_POSE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
+TROT_STEP_RIGHT_POSE = [20, -20, 0, 0, 0, 0, -20, 20, 0, 0, 0, 0]
+TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 20, -20, 0]
 
 
 class GaitPlanner():
-    def __init__(self, controller, gait=GAIT_TROT, wait_time=2):
+    def __init__(self, controller, gait=GAIT_TROT, wait_time=0.5):
         self.controller = controller
         self.gait = gait
         self.last_step = None
@@ -55,3 +55,9 @@ class GaitPlanner():
 
             step_down = Timer(0.75, self.step_trot, STEP_DOWN)
             step_down.start()
+
+    def dance(self, dur):
+        start = time.time()
+        while time.time() - start > dur:
+            self.step()
+            time.sleep(0.5)

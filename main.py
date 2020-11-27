@@ -37,8 +37,9 @@ def main():
 
     move = gait_planner.GaitPlanner(controller)
 
-    while True:
-        move.step()
-        time.sleep(3)
+    move.dance(10)
+    #while True:
+        #move.step()
+        #time.sleep(3)
 
 main()
