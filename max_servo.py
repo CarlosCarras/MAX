@@ -77,6 +77,9 @@ class MAXServo:
     def get_goal(self):
         return self.goal_pose
 
+    def increment_goal(self, increment):
+        self.goal_pose += increment
+
     def stand(self):
         self.set_goal(self.stand_angle)
 

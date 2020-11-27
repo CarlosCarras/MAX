@@ -37,7 +37,7 @@ class GaitPlanner():
             self.last_step = STEP_RIGHT
 
         if self.last_move == STEP_UP:
-            change = change * -1
+            change =  [i*-1 for i in change]
             self.last_move = STEP_DOWN
         else:
             self.last_move = STEP_UP
@@ -53,6 +53,6 @@ class GaitPlanner():
         if self.gait is GAIT_TROT:
             self.step_trot()
 
-            step_down = Timer(1.0, self.step_trot)
+            step_down = Timer(1.0, self.step_trot, )
 
             step_down.start()

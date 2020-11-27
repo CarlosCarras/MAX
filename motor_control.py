@@ -86,4 +86,4 @@ class Controller:
 
     def change_pose(self, changes):
         for i in range(self.num_servos):
-            self.servos[i].set_goal(self.servos[i].get_goal() + changes[i])
+            self.servos[i].increment_goal(changes[i])
