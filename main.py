@@ -43,3 +43,5 @@ def main():
     #while True:
         #move.step()
         #time.sleep(3)
+
+main()
