@@ -11,6 +11,9 @@ STEP_DOWN = "D"
 
 TROT_STEP_RIGHT_POSE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
+TROT_STEP_LEFT_SWING = [0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0]
+TROT_STEP_RIGHT_SWING = [0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0]
+
 BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -35,8 +38,10 @@ class GaitPlanner():
     def step_trot(self, step_dir):
         if self.last_step == STEP_RIGHT:
             change = TROT_STEP_LEFT_POSE
+            swing = TROT_STEP_LEFT_SWING
         else:
             change = TROT_STEP_RIGHT_POSE
+            swing = TROT_STEP_RIGHT_SWING
 
         if step_dir == STEP_DOWN:
             change =  [i*-1 for i in change]
@@ -44,6 +49,10 @@ class GaitPlanner():
         self.controller.change_pose(change)
         self.controller.update()
         self.step_time = time.time()
+        time.sleep(0.2)
+
+        self.controller.change_pose(swing)
+        self.controller.update()
 
 
     def step(self):
@@ -58,7 +67,7 @@ class GaitPlanner():
         if self.gait is GAIT_TROT:
             self.step_trot(STEP_UP)
 
-            step_down = Timer(0.75, self.step_trot, STEP_DOWN)
+            step_down = Timer(0.5, self.step_trot, STEP_DOWN)
             step_down.start()
 
     def dance(self, dur):
@@ -78,7 +87,7 @@ class GaitPlanner():
         time.sleep(hold)
         self.controller.set_pose(original_pose)
         self.controller.update()
-        time.sleep(0.5)
+        time.sleep(1.25)
 
         if speed:
             self.controller.set_speed(original_speed)
