@@ -12,8 +12,9 @@ LEG_FL = 1
 LEG_RR = 2
 LEG_RL = 3
 
-LIFT_LEGS = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
-SWING_LEGS = [0, 0, 0, 0, -50, 0, 0, 0, 0, 0, 0, 0]
+LIFT_LEGS = [0, 0, 0, -20, 20, 0, 20, -20, 0, 0, 0, 0]
+SWING_LEGS = [0, 0, 0, 30, -50, 0, 0, 50, 0, 0, 0, 0]
+RESTORE_LEGS = [0, 0, 0, 10, -20, 0, -20, 20, 0, 0, 0, 0]
 
 BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -63,7 +64,7 @@ class GaitPlanner:
 
 
     def restore_legs(self, legs):
-        change = SWING_LEGS[:]
+        change = RESTORE_LEGS[:]
         change = [i * -1 for i in change]
         self.update_legs(change, legs)
 
