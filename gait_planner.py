@@ -42,6 +42,7 @@ class GaitPlanner():
                 change[i] = 0
 
         self.controller.change_pose(change)
+        print(change)
         self.controller.update()
 
 
