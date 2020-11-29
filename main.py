@@ -42,7 +42,7 @@ def main():
 
     while True:
         move.step()
-        time.sleep(3)
+        time.sleep(2)
         #controller.stand()
 
 

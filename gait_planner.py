@@ -42,7 +42,7 @@ class GaitPlanner():
                 change[i] = 0
 
         self.controller.change_pose(change)
-        print(change)
+        print(legs)
         self.controller.update()
 
 
@@ -79,8 +79,11 @@ class GaitPlanner():
             legs = []
 
         self.raise_legs(legs)
+        time.sleep(0.2)
         self.swing_legs(legs)
+        time.sleep(0.2)
         self.lower_legs(legs)
+        time.sleep(0.5)
         self.restore_legs(legs)
         #Timer(0.5, self.lower_legs, legs).start()
 
