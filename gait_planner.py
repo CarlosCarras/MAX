@@ -13,7 +13,7 @@ LEG_RR = 2
 LEG_RL = 3
 
 LIFT_LEGS = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
-SWING_LEGS = [0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, 0]
+SWING_LEGS = [0, 0, 0, 0, -50, 0, 0, 0, 0, 0, 0, 0]
 
 BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -38,9 +38,7 @@ class GaitPlanner():
 
     def update_legs(self, change, legs):
         for i in range(len(change)):
-            if not i//3 in legs:
-                print(i // 3)
-                print("Worked")
+            if not (i//3 in legs):
                 change[i] = 0
 
         self.controller.change_pose(change)
