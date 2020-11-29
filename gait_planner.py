@@ -37,7 +37,6 @@ class GaitPlanner:
 
 
     def update_legs(self, change, legs):
-        print(change)
         for i in range(len(change)):
             if not (i//3 in legs):
                 change[i] = 0
@@ -56,6 +55,7 @@ class GaitPlanner:
 
     def lower_legs(self, legs):
         change = LIFT_LEGS
+        print(change)
         change = [i*-1 for i in change]
         self.update_legs(change, legs)
         self.step_time = time.time()
