@@ -2,8 +2,8 @@ from __future__ import division
 import motor_control
 import calibrate_servos
 import thermal_cam
-import imu
 import gait_planner
+import imu
 import time
 
 
