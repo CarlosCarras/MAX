@@ -19,7 +19,7 @@ BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
-class GaitPlanner():
+class GaitPlanner:
     def __init__(self, controller, imu=None, gait=GAIT_TROT, wait_time=0.5):
         self.controller = controller
         self.imu = imu
@@ -39,7 +39,6 @@ class GaitPlanner():
     def update_legs(self, change, legs):
         for i in range(len(change)):
             if not (i//3 in legs):
-                print(change[i])
                 change[i] = 0
 
         self.controller.change_pose(change)
@@ -55,7 +54,9 @@ class GaitPlanner():
 
 
     def lower_legs(self, legs):
+        print(LIFT_LEGS)
         change = [LIFT_LEGS[i]*-1 for i in LIFT_LEGS]
+        print(change)
         self.update_legs(change, legs)
         self.step_time = time.time()
 
