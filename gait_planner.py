@@ -83,7 +83,7 @@ class GaitPlanner():
         self.swing_legs(legs)
         time.sleep(0.2)
         self.lower_legs(legs)
-        time.sleep(0.5)
+        time.sleep(1)
         self.restore_legs(legs)
         #Timer(0.5, self.lower_legs, legs).start()
 
