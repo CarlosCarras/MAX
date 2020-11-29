@@ -38,11 +38,11 @@ class GaitPlanner():
 
     def update_legs(self, change, legs):
         for i in range(len(change)):
+            print(i//3)
             if not i//3 in legs:
                 change[i] = 0
 
         self.controller.change_pose(change)
-        print(legs)
         self.controller.update()
 
 
