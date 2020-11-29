@@ -12,7 +12,7 @@ STEP_DOWN = "D"
 TROT_STEP_RIGHT_POSE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 TROT_STEP_LEFT_SWING = [0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0]
-TROT_STEP_RIGHT_SWING = [0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, 0]
+TROT_STEP_RIGHT_SWING = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -69,6 +69,26 @@ class GaitPlanner():
 
             step_down = Timer(0.5, self.step_trot, STEP_DOWN)
             step_down.start()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def dance(self, dur):
         start = time.time()
