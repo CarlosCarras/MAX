@@ -35,7 +35,7 @@ def main():
     calibrate_servos.calibrate(controller)
 
     controller.stand()
-    time.sleep(50)
+    #time.sleep(50)
     #controller.rest()
 
     #move.photo_pose(10)
