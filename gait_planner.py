@@ -41,6 +41,7 @@ class GaitPlanner:
             if not (i//3 in legs):
                 change[i] = 0
 
+        print(change)
         self.controller.change_pose(change)
         self.controller.update()
 
