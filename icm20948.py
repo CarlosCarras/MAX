@@ -173,11 +173,9 @@ class ICM20948:
             raise RuntimeError("Unable to find ICM20948")
 
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
-        time.sleep(0.001)
+        time.sleep(0.01)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
-        time.sleep(0.001)
         self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
-        time.sleep(0.001)
 
         self.bank(2)
         self.set_gyro_sample_rate(100)
@@ -223,11 +221,9 @@ class ICM20948:
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
         user_ctrl = self.read(ICM20948_USR0_USER_CTRL)
-        time.sleep(0.001)
         self.write(ICM20948_USR0_USER_CTRL, user_ctrl | ICM20948_I2C_MST_EN_bm)
         time.sleep(0.005)
         self.write(ICM20948_USR0_USER_CTRL, user_ctrl)
-        time.sleep(0.001)
 
     def mag_write(self, register, data):
         self.bank(3)
@@ -253,13 +249,9 @@ class ICM20948:
         """ reads up to 24 bytes from the slave magnetometer """
         self.bank(3)
         self.write(ICM20948_USR3_I2C_SLV0_CTRL, 0x88 | num_bytes)
-        time.sleep(0.001)
         self.write(ICM20948_USR3_I2C_SLV0_ADDR, AK09916_I2C_ADDR | I2C_SLV0_RNW_bm)
-        time.sleep(0.001)
         self.write(ICM20948_USR3_I2C_SLV0_REG, register)
-        time.sleep(0.001)
         self.write(ICM20948_USR3_I2C_SLV0_DO, 0xFF)
-        time.sleep(0.001)
 
         self.bank(0)
         self.trigger_mag_io()
@@ -300,7 +292,6 @@ class ICM20948:
         rate = int((1125.0 / rate) - 1)             # 125Hz - 1.125 kHz / (1 + rate), pp. 63
         self.write(ICM20948_USR2_ACCEL_SMPLRT_DIV_1, (rate >> 8) & 0xff)
         self.write(ICM20948_USR2_ACCEL_SMPLRT_DIV_2, rate & 0xff)
-        time.sleep(0.001)
 
     def set_accel_scale(self, scale=16):
         """ sets the accelerometer fulls cale range. the larger the scale, the lower the resolution. pp. 64 """
@@ -308,7 +299,6 @@ class ICM20948:
         accel_config = self.read(ICM20948_USR2_ACCEL_CONFIG) & 0b11111001
         accel_config |= {2: 0b00, 4: 0b01, 8: 0b10, 16: 0b11}[scale] << 1
         self.write(ICM20948_USR2_ACCEL_CONFIG, accel_config)
-        time.sleep(0.001)
 
     def set_accel_low_pass(self, enabled=True, mode=5):
         """ configures the accelerometer low pass filter """
@@ -349,7 +339,6 @@ class ICM20948:
         value = self.read(ICM20948_USR2_GYRO_CONFIG_1) & 0b11111001
         value |= {250: 0b00, 500: 0b01, 1000: 0b10, 2000: 0b11}[scale] << 1
         self.write(ICM20948_USR2_GYRO_CONFIG_1, value)
-        time.sleep(0.001)
 
     def set_gyro_low_pass(self, enabled=True, mode=5):
         """configures the gyroscope low pass filter """
@@ -359,7 +348,6 @@ class ICM20948:
             value |= 0b1
         value |= (mode & 0x07) << 4
         self.write(ICM20948_USR2_GYRO_CONFIG_1, value)
-        time.sleep(0.001)
 
     def get_gyro_data(self):
         self.bank(0)

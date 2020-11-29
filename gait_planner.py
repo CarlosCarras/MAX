@@ -16,7 +16,7 @@ BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 class GaitPlanner():
-    def __init__(self, controller, imu, gait=GAIT_TROT, wait_time=0.5):
+    def __init__(self, controller, imu=None, gait=GAIT_TROT, wait_time=0.5):
         self.controller = controller
         self.imu = imu
         self.gait = gait
