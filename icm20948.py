@@ -223,9 +223,11 @@ class ICM20948:
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
         user_ctrl = self.read(ICM20948_USR0_USER_CTRL)
+        time.sleep(0.001)
         self.write(ICM20948_USR0_USER_CTRL, user_ctrl | ICM20948_I2C_MST_EN_bm)
         time.sleep(0.005)
         self.write(ICM20948_USR0_USER_CTRL, user_ctrl)
+        time.sleep(0.001)
 
     def mag_write(self, register, data):
         self.bank(3)
@@ -251,9 +253,13 @@ class ICM20948:
         """ reads up to 24 bytes from the slave magnetometer """
         self.bank(3)
         self.write(ICM20948_USR3_I2C_SLV0_CTRL, 0x88 | num_bytes)
+        time.sleep(0.001)
         self.write(ICM20948_USR3_I2C_SLV0_ADDR, AK09916_I2C_ADDR | I2C_SLV0_RNW_bm)
+        time.sleep(0.001)
         self.write(ICM20948_USR3_I2C_SLV0_REG, register)
+        time.sleep(0.001)
         self.write(ICM20948_USR3_I2C_SLV0_DO, 0xFF)
+        time.sleep(0.001)
 
         self.bank(0)
         self.trigger_mag_io()
