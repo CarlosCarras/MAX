@@ -42,6 +42,8 @@ def main():
 
     while True:
         move.step()
-        time.sleep(3)
+        time.sleep(1.5)
+        controller.stand()
+
 
 main()
