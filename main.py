@@ -2,6 +2,7 @@ from __future__ import division
 import motor_control
 import calibrate_servos
 import thermal_cam
+import imu
 import gait_planner
 import time
 
@@ -25,21 +26,20 @@ def initialize_servos(controller):
 def main():
     print("...Initializing MAX...")
 
+    imu = imu.IMU()
     camera = thermal_cam.ThermalCam()
     controller = motor_control.Controller()
-    initialize_servos(controller)
+    move = gait_planner.GaitPlanner(controller, imu)
 
+    initialize_servos(controller)
     calibrate_servos.calibrate(controller)
 
     controller.stand()
-    time.sleep(3)
+    time.sleep(50)
     #controller.rest()
 
-    move = gait_planner.GaitPlanner(controller)
+    #move.photo_pose(10)
 
-    move.dance(10)
     #while True:
         #move.step()
         #time.sleep(3)
-
-main()

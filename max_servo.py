@@ -37,8 +37,8 @@ class MAXServo:
         self.allowable_error = 1                # deg
         self.goal_pose = self.stand_angle       # deg
         self.current_pose = self.stand_angle    # deg
-        self.desired_speed = 90.0               # deg/sec
-        self.delay = 0.01                       # seconds
+        self.joint_speed = 90.0                 # deg/sec
+        self.speed_scalar = 0.01
 
         self.controller = controller
         self.set_pwm()
@@ -80,17 +80,27 @@ class MAXServo:
     def increment_goal(self, increment):
         self.goal_pose += increment
 
+    def set_speed(self, speed):
+        self.speed_scalar = speed
+
+    def get_speed(self):
+        return self.speed_scalar
+
     def stand(self):
         self.set_goal(self.stand_angle)
 
     def rest(self):
         self.set_goal(self.rest_angle)
 
-    def clk(self):
+    def clk(self, speed=None):
+        if not speed:
+            speed = self.speed_scalar
+
         if not self.goal_reached():
-            self.current_pose += self.get_direction() * self.delay * self.desired_speed
+            self.current_pose += self.get_direction() * self.joint_speed * speed
         else:
             self.current_pose = self.goal_pose
+
         self.set_pwm()
 
     def update(self):

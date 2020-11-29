@@ -12,7 +12,6 @@ purpose:  This file oversees the operation of all of the servo motors in MAX.
 
 import numpy as np
 import pca9685
-import gait_planner
 from max_servo import MAXServo
 
 
@@ -83,6 +82,16 @@ class Controller:
         for i in range(self.num_servos):
             angles.append(self.servos[i].current_pose)
         return angles
+
+    def set_speed(self, speed):
+        for i in range(self.num_servos):
+            self.servos[i].set_speed(speed)
+
+    def get_speed(self):
+        speeds = []
+        for i in range(self.num_servos):
+            speeds.append(self.servos[i].get_speed())
+        return speeds
 
     def change_pose(self, changes):
         for i in range(self.num_servos):

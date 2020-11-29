@@ -9,17 +9,22 @@ STEP_UP = "U"
 STEP_DOWN = "D"
 
 
-TROT_STEP_RIGHT_POSE = [20, -20, 0, 0, 0, 0, -20, 20, 0, 0, 0, 0]
-TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 20, -20, 0]
+TROT_STEP_RIGHT_POSE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
+PHOTO_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
+BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 class GaitPlanner():
-    def __init__(self, controller, gait=GAIT_TROT, wait_time=0.5):
+    def __init__(self, controller, imu, gait=GAIT_TROT, wait_time=0.5):
         self.controller = controller
+        self.imu = imu
         self.gait = gait
         self.last_step = None
         self.step_time = 0
         self.wait_time = wait_time      # in seconds
+
+        self.kp = 0.01
 
 
     def set_gait(self, gait):
@@ -61,3 +66,27 @@ class GaitPlanner():
         while time.time() - start < dur:
             self.step()
             time.sleep(0.5)
+
+    def photo_pose(self, hold, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
+
+        original_pose = self.controller.get_pose()
+        self.controller.set_pose(PHOTO_POSE)
+        self.controller.update()
+        time.sleep(hold)
+        self.controller.set_pose(original_pose)
+        self.controller.update()
+        time.sleep(0.5)
+
+        if speed:
+            self.controller.set_speed(original_speed)
+
+    def correct(self):
+        roll, pitch, yaw = self.imu.get_rpy()
+
+        roll_correction = [roll*self.kp*-1*i for i in BODY_ROLL]
+        self.controller.change_pose(roll_correction)
+
+
