@@ -11,7 +11,7 @@ STEP_DOWN = "D"
 
 TROT_STEP_RIGHT_POSE = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 TROT_STEP_LEFT_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
-PHOTO_POSE = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
+BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
@@ -67,13 +67,13 @@ class GaitPlanner():
             self.step()
             time.sleep(0.5)
 
-    def photo_pose(self, hold, speed=None):
+    def stretch(self, hold, speed=None):
         if speed:
             original_speed = self.controller.get_speed()
             self.controller.set_speed(speed)
 
         original_pose = self.controller.get_pose()
-        self.controller.set_pose(PHOTO_POSE)
+        self.controller.set_pose(BOW)
         self.controller.update()
         time.sleep(hold)
         self.controller.set_pose(original_pose)

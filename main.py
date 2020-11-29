@@ -40,8 +40,8 @@ def main():
 
     #move.photo_pose(10)
 
-    #while True:
-        #move.step()
-        #time.sleep(3)
+    while True:
+        move.step()
+        time.sleep(3)
 
 main()
