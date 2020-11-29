@@ -46,23 +46,24 @@ class GaitPlanner:
 
 
     def raise_legs(self, legs):
-        self.update_legs(LIFT_LEGS, legs)
+        change = LIFT_LEGS[:]
+        self.update_legs(change, legs)
 
 
     def swing_legs(self, legs):
-        self.update_legs(SWING_LEGS, legs)
+        change = SWING_LEGS[:]
+        self.update_legs(change, legs)
 
 
     def lower_legs(self, legs):
-        change = LIFT_LEGS
-        print(change)
+        change = LIFT_LEGS[:]
         change = [i*-1 for i in change]
         self.update_legs(change, legs)
         self.step_time = time.time()
 
 
     def restore_legs(self, legs):
-        change = SWING_LEGS
+        change = SWING_LEGS[:]
         change = [i * -1 for i in change]
         self.update_legs(change, legs)
 
