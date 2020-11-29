@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
 """
-filename: imu.py
+filename: max_imu.py
 author:   Carlos Carrasquillo
 created:  October 23, 2020
 modified: October 24, 2020
 project:  MAX
 
 purpose:  This file stores the IMU class, which can be used to perform useful operations with the MPU6050 IMU.
-discloure: This code was modeled after Maurice Rahme's imu.py file, which can be found at,
-https://github.com/OpenQuadruped/spot_mini_mini/blob/spot/spot_real/Control/RPi/lib/imu.py
+discloure: This code was modeled after Maurice Rahme's max_imu.py file, which can be found at,
+https://github.com/OpenQuadruped/spot_mini_mini/blob/spot/spot_real/Control/RPi/lib/max_imu.py
 """
 
 import math

@@ -3,7 +3,7 @@ import motor_control
 import calibrate_servos
 import thermal_cam
 import gait_planner
-import imu
+import max_imu
 import time
 
 
@@ -26,7 +26,7 @@ def initialize_servos(controller):
 def main():
     print("...Initializing MAX...")
 
-    imu = imu.IMU()
+    imu = max_imu.IMU()
     camera = thermal_cam.ThermalCam()
     controller = motor_control.Controller()
     move = gait_planner.GaitPlanner(controller, imu)
