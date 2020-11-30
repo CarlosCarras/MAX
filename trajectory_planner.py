@@ -23,6 +23,7 @@ class TrajectoryPlanner():
         last_dir = None
         start_time = time.time()
         while time.time() - start_time < dur:
+            print(self.get_hotspot_dir())
             if not self.get_hotspot_dir():
                 dir = 0
             else:
