@@ -28,7 +28,6 @@ class GaitPlanner:
         self.controller = controller
         self.imu = imu
         self.gait = gait
-        self.last_step = None
         self.step_time = 0
         self.wait_time = wait_time      # in seconds
 
@@ -51,7 +50,6 @@ class GaitPlanner:
     def step(self):
         if time.time() - self.step_time < self.wait_time:
             return
-        self.last_step = not self.last_step
 
         if self.gait is GAIT_TROT:
             self.trot()
@@ -60,6 +58,9 @@ class GaitPlanner:
         #Timer(0.5, self.lower_legs, legs).start()
 
     def walk_forward(self, dur):
+        self.stand()
+        time.sleep(2)
+
         start = time.time()
         while time.time() - start < dur:
             self.step()
