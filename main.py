@@ -26,19 +26,14 @@ def initialize_servos(controller):
 def main():
     print('\n...Initializing MAX...\n')
 
-    #imu = max_imu.IMU()
+    imu = max_imu.IMU()
     camera = thermal_cam.ThermalCam()
     controller = motor_control.Controller()
     initialize_servos(controller)
 
-    move = gait_planner.GaitPlanner(controller)
+    move = gait_planner.GaitPlanner(controller, imu)
     calibrate_servos.calibrate(controller)
 
-    move.set_height(20)
-    time.sleep(5)
-    move.set_height(-20)
-    time.sleep(5)
-    move.walk_forward(30)
-    #move.photo_pose(10)
+
 
 main()
