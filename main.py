@@ -32,12 +32,12 @@ def main():
     initialize_servos(controller)
 
     move = gait_planner.GaitPlanner(controller)
-    #calibrate_servos.calibrate(controller)
+    calibrate_servos.calibrate(controller)
 
     move.rest()
     time.sleep(2)
 
     move.walk_forward(30)
-    # move.photo_pose(10)
+    #move.photo_pose(10)
 
 main()
