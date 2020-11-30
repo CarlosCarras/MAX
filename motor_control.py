@@ -56,13 +56,8 @@ class Controller:
             self.servos[i].update()
 
     def update_simultaneously(self):
-        updated = np.zeros((12, 1))
-        while np.min(updated) < 1:
-            for i in range(self.num_servos):
-                if not self.servos[i].goal_reached():
-                    self.servos[i].clk()
-                else:
-                    updated[i] = 1
+        for i in range(5):
+            self.clk()
 
     def stand(self):
         for i in range(self.num_servos):
