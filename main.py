@@ -24,7 +24,7 @@ def initialize_servos(controller):
 
 
 def main():
-    print("...Initializing MAX...")
+    print('\n...Initializing MAX...\n')
 
     #imu = max_imu.IMU()
     camera = thermal_cam.ThermalCam()
