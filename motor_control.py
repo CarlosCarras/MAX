@@ -10,7 +10,6 @@ project:  MAX
 purpose:  This file oversees the operation of all of the servo motors in MAX.
 """
 
-import numpy as np
 import pca9685
 from max_servo import MAXServo
 

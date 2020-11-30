@@ -116,6 +116,10 @@ class GaitPlanner:
         self.stand()
         time.sleep(sleep_time)
 
+    def point(self, motor=0, angle=20):
+        self.controller.servos[motor].increment_goal(angle)
+
+
 
 
 

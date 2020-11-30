@@ -33,6 +33,7 @@ class ThermalCam:
         self.amg8833 = amg88xx.AMG88XX()
         self.width = self.amg8833.AMG8833_PIXEL_ARRAY_WIDTH
         self.height = self.amg8833.AMG8833_PIXEL_ARRAY_HEIGHT
+        self.num_pixels = self.width * self.height
         self.min_temp = self.amg8833.AMG8833_MIN_TEMP
         self.max_temp = self.amg8833.AMG8833_MAX_TEMP
         self.min_pixel_temp = 0
@@ -41,6 +42,9 @@ class ThermalCam:
         self.current_max_pixel_temp = 0
 
         self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
+
+    def get_pixels(self):
+        return self.amg8833.get_pixels()
 
     def map_temp(self, val):
         return (val - self.min_temp) * (COLORDEPTH - 1) / (self.max_temp - self.min_temp)
@@ -58,7 +62,7 @@ class ThermalCam:
         return pixels
 
     def show(self):
-        pixels = self.amg8833.get_pixels()
+        pixels = self.get_pixels()
         pixels = self.get_mapping(pixels)
 
         self.current_max_pixel_temp = 0
@@ -103,3 +107,6 @@ class ThermalCam:
 
     def get_current_color_range(self):
         return self.get_current_heat_range() / len(CONSOLE_COLORS)
+
+
+

@@ -18,7 +18,6 @@ https://github.com/adafruit/Adafruit_AMG88xx/blob/master/Adafruit_AMG88xx.cpp
 
 from smbus2 import SMBus
 import time
-import struct
 
 AMG88XX_PCTL = 0x00
 AMG88XX_RST = 0x01

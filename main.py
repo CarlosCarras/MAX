@@ -3,6 +3,7 @@ import motor_control
 import calibrate_servos
 import thermal_cam
 import gait_planner
+import trajectory_planner
 import max_imu
 import time
 
@@ -32,8 +33,9 @@ def main():
     initialize_servos(controller)
 
     move = gait_planner.GaitPlanner(controller)
+    perception = trajectory_planner.TrajectoryPlanner(camera, controller)
     calibrate_servos.calibrate(controller)
 
-    move.stretch()
+    perception.point_hotspot(60)
 
 main()
