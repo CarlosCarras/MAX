@@ -97,38 +97,22 @@ class GaitPlanner:
         if speed:
             self.controller.set_speed(original_speed)
 
+    def stretch(self, deg=20, dur=12, speed=None):
+        sleep_time = dur/6
+        self.set_height(deg)
+        time.sleep(sleep_time)
+        self.set_height(-deg)
+        time.sleep(sleep_time)
+        self.set_pitch(deg)
+        time.sleep(sleep_time)
+        self.set_pitch(-deg)
+        time.sleep(sleep_time)
+        self.stand()
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    def stretch(self, hold, speed=None):
-        if speed:
-            original_speed = self.controller.get_speed()
-            self.controller.set_speed(speed)
-
-        original_pose = self.controller.get_pose()
-        self.controller.set_pose(BOW)
-        self.controller.update()
-        time.sleep(hold)
-        self.controller.set_pose(original_pose)
-        self.controller.update()
-        time.sleep(1.25)
-
-        if speed:
-            self.controller.set_speed(original_speed)
 
     def correct(self):
         roll, pitch, yaw = self.imu.get_rpy()
