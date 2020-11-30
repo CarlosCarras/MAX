@@ -56,12 +56,10 @@ class Controller:
             self.servos[i].update()
 
     def all_goals_reached(self):
-        goals_reached = True
         for i in range(self.num_servos):
             if not self.servos[i].goal_reached():
-                goals_reached = False
-                break
-        return goals_reached
+                return False
+        return True
 
     def update_simultaneously(self):
         while not self.all_goals_reached():
