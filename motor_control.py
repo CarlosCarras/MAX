@@ -55,8 +55,16 @@ class Controller:
         for i in range(self.num_servos):
             self.servos[i].update()
 
+    def all_goals_reached(self):
+        goals_reached = True
+        for i in range(self.num_servos):
+            if not self.servos[i].goal_reached():
+                goals_reached = False
+                break
+        return goals_reached
+
     def update_simultaneously(self):
-        for i in range(20):
+        if not self.all_goals_reached():
             self.clk()
 
     def stand(self):
