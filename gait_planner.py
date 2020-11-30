@@ -97,13 +97,15 @@ class GaitPlanner:
         if speed:
             self.controller.set_speed(original_speed)
 
-    def stretch(self, deg=20, dur=12, speed=None):
-        sleep_time = dur/6
+    def stretch(self, deg=20, dur=16, speed=None):
+        sleep_time = dur/8
 
         time.sleep(sleep_time)
         self.stand()
         time.sleep(sleep_time)
         self.set_height(deg)
+        time.sleep(sleep_time)
+        self.stand()
         time.sleep(sleep_time)
         self.set_height(-deg)
         time.sleep(sleep_time)
