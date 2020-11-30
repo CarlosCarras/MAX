@@ -59,7 +59,7 @@ class GaitPlanner:
         start = time.time()
         while time.time() - start < dur:
             self.step()
-            time.sleep(0.3)
+            time.sleep(0.15)
 
     def stand(self):
         self.controller.stand()
