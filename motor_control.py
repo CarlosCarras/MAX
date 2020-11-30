@@ -64,7 +64,7 @@ class Controller:
         return goals_reached
 
     def update_simultaneously(self):
-        if not self.all_goals_reached():
+        while not self.all_goals_reached():
             self.clk()
 
     def stand(self):
