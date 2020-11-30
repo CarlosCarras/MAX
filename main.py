@@ -29,10 +29,10 @@ def main():
     #imu = max_imu.IMU()
     camera = thermal_cam.ThermalCam()
     controller = motor_control.Controller()
-    move = gait_planner.GaitPlanner(controller)
-
     initialize_servos(controller)
-    calibrate_servos.calibrate(controller)
+
+    move = gait_planner.GaitPlanner(controller)
+    #calibrate_servos.calibrate(controller)
 
     move.rest()
     time.sleep(2)
