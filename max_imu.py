@@ -152,14 +152,14 @@ class IMU:
 
         roll_accel  = 180.0 * math.atan2(ay, ax) / np.pi - self.roll_calibration        # acclerometer Y, Z
         pitch_accel = 180.0 * math.atan2(ax, az) / np.pi - self.pitch_calibration       # acclerometer X, Z
-        yaw_mag = 180.0 * (math.atan2(my, mx) / np.pi)                                  # magnetometer Y, X
+        #yaw_mag = 180.0 * (math.atan2(my, mx) / np.pi)                                  # magnetometer Y, X
 
         # calculate filtered Roll & Pitch (RP) data
         self.roll = roll_accel*self.comp_filter + (1-self.comp_filter)*(roll_gyro_dt + self.roll)
         self.pitch = pitch_accel*self.comp_filter + (1-self.comp_filter)*(pitch_gyro_dt + self.pitch)
-        self.yaw = yaw_mag - self.yaw_bias
-        self.yaw -= 360.0 * math.floor((self.yaw + 180) / 360.0)
+        #self.yaw = yaw_mag - self.yaw_bias
+        #self.yaw -= 360.0 * math.floor((self.yaw + 180) / 360.0)
 
-        return self.roll, self.pitch, self.yaw
+        return self.roll, self.pitch#, self.yaw
 
 
