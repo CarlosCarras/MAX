@@ -85,15 +85,6 @@ class GaitPlanner:
 
 
 
-
-
-
-    def dance(self, dur):
-        start = time.time()
-        while time.time() - start < dur:
-            self.step()
-            time.sleep(0.5)
-
     def stretch(self, hold, speed=None):
         if speed:
             original_speed = self.controller.get_speed()
