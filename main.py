@@ -33,7 +33,7 @@ def main():
     initialize_servos(controller)
 
     move = gait_planner.GaitPlanner(controller)
-    perception = trajectory_planner.TrajectoryPlanner(camera, controller)
+    perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
     perception.point_hotspot(60)
