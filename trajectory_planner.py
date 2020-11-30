@@ -20,14 +20,10 @@ class TrajectoryPlanner():
     def point_hotspot(self, dur=None):
         if not dur: dur = 0.05
         last_dir = None
-        
+
         start_time = time.time()
         while time.time() - start_time < dur:
-            if not self.get_hotspot_dir():
-                dir = 0
-            else:
-                dir = 1
-
+            dir = self.get_hotspot_dir() * 3
             if last_dir is not dir:
                 self.controller.stand()
                 self.controller.point(dir)
