@@ -12,9 +12,9 @@ LEG_FL = 1
 LEG_RR = 2
 LEG_RL = 3
 
-LIFT_LEGS = [0, 0, 0, -20, 20, 0, 20, -20, 0, 0, 0, 0]
-SWING_LEGS = [0, 0, 0, 30, -50, 0, 0, 50, 0, 0, 0, 0]
-RESTORE_LEGS = [0, 0, 0, 10, -20, 0, -20, 20, 0, 0, 0, 0]
+TROT = [[155.0,  35.0, 110.0, 45.0, 200.0,  55.0, 160.0,  25.0, 145.0, 120.0, 160.0,  20.0],
+        [155.0,  35.0, 110.0, 75.0, 150.0,  55.0, 130.0,  75.0, 145.0, 120.0, 160.0,  20.0],
+        [155.0,  35.0, 110.0, 65.0, 180.0,  55.0, 140.0,  45.0, 145.0, 120.0, 160.0,  20.0]]
 
 BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -36,37 +36,11 @@ class GaitPlanner:
         if gait is GAIT_TROT:
             self.gait = GAIT_TROT
 
-
-    def update_legs(self, change, legs):
-        for i in range(len(change)):
-            if not (i//3 in legs):
-                change[i] = 0
-
-        self.controller.change_pose(change)
-        self.controller.update()
-
-
-    def raise_legs(self, legs):
-        change = LIFT_LEGS[:]
-        self.update_legs(change, legs)
-
-
-    def swing_legs(self, legs):
-        change = SWING_LEGS[:]
-        self.update_legs(change, legs)
-
-
-    def lower_legs(self, legs):
-        change = LIFT_LEGS[:]
-        change = [i*-1 for i in change]
-        self.update_legs(change, legs)
-        self.step_time = time.time()
-
-
-    def restore_legs(self, legs):
-        change = RESTORE_LEGS[:]
-        change = [i * -1 for i in change]
-        self.update_legs(change, legs)
+    def trot(self):
+        for i in range(len(TROT)):
+            for j in range(len(TROT[0])):
+                self.controller.set_pose(TROT[i][j])
+                time.sleep(0.3)
 
 
     def step(self):
@@ -75,21 +49,22 @@ class GaitPlanner:
         self.last_step = not self.last_step
 
         if self.gait is GAIT_TROT:
-            if self.last_step == STEP_FORWARD_RIGHT:
-                legs = [LEG_FL, LEG_RR]
-            else:
-                legs = [LEG_FR, LEG_RL]
+            self.trot()
         else:
-            legs = []
-
-        self.raise_legs(legs)
-        time.sleep(0.2)
-        self.swing_legs(legs)
-        time.sleep(0.2)
-        self.lower_legs(legs)
-        time.sleep(1)
-        self.restore_legs(legs)
+            return
         #Timer(0.5, self.lower_legs, legs).start()
+
+    def walk_forward(self, dur):
+        start = time.time()
+        while time.time() - start < dur:
+            self.step()
+            time.sleep(0.5)
+
+    def stand(self):
+        self.controller.stand()
+
+    def rest(self):
+        self.controller.rest()
 
 
 

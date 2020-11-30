@@ -16,6 +16,7 @@ from max_servo import MAXServo
 
 
 class Controller:
+
     motors = ["FR Knee", "FR Hip", "FR AB/AD",
               "FL Knee", "FL Hip", "FL AB/AD",
               "RR Knee", "RR Hip", "RR AB/AD",

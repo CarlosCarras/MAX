@@ -34,16 +34,9 @@ def main():
     initialize_servos(controller)
     calibrate_servos.calibrate(controller)
 
-    controller.stand()
-    #time.sleep(5)
-    #controller.rest()
-
-    #move.photo_pose(10)
-
-    while True:
-        move.step()
-        time.sleep(2)
-        #controller.stand()
-
+    move.stand()
+    time.sleep(2)
+    move.walk_forward(30)
+    # move.photo_pose(10)
 
 main()
