@@ -99,6 +99,10 @@ class GaitPlanner:
 
     def stretch(self, deg=20, dur=12, speed=None):
         sleep_time = dur/6
+
+        time.sleep(sleep_time)
+        self.stand()
+        time.sleep(sleep_time)
         self.set_height(deg)
         time.sleep(sleep_time)
         self.set_height(-deg)
@@ -108,6 +112,7 @@ class GaitPlanner:
         self.set_pitch(-deg)
         time.sleep(sleep_time)
         self.stand()
+        time.sleep(sleep_time)
 
 
 
