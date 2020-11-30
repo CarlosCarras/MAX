@@ -41,7 +41,7 @@ class GaitPlanner:
         for i in range(len(TROT)):
             self.controller.set_pose(TROT[i])
             self.controller.update()
-            time.sleep(0.3)
+            time.sleep(0.15)
 
 
     def step(self):
@@ -59,7 +59,7 @@ class GaitPlanner:
         start = time.time()
         while time.time() - start < dur:
             self.step()
-            time.sleep(0.15)
+            time.sleep(0.5)
 
     def stand(self):
         self.controller.stand()
