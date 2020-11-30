@@ -23,10 +23,12 @@ class TrajectoryPlanner():
 
         start_time = time.time()
         while time.time() - start_time < dur:
-            dir = self.get_hotspot_dir() * 3
+            dir = self.get_hotspot_dir()
+            motor = dir*3
+            angle = -20*dir - 20*(dir-1)
             if last_dir is not dir:
                 self.controller.stand()
-                self.controller.point(dir)
+                self.controller.point(motor, angle)
             last_dir = dir
             time.sleep(1)
 
