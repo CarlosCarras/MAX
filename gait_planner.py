@@ -7,11 +7,6 @@ GAIT_TROT = 0x00
 STEP_FORWARD_RIGHT = 0
 STEP_FORWARD_LEFT = 1
 
-LEG_FR = 0
-LEG_FL = 1
-LEG_RR = 2
-LEG_RL = 3
-
 TROT = [[155.0,  35.0, 110.0, 45.0, 200.0,  55.0, 160.0,  25.0, 145.0, 120.0, 160.0,  20.0],
         [155.0,  35.0, 110.0, 45.0, 150.0,  55.0, 160.0,  75.0, 145.0, 120.0, 160.0,  20.0],
         [155.0,  35.0, 110.0, 75.0, 150.0,  55.0, 130.0,  75.0, 145.0, 120.0, 160.0,  20.0],
@@ -46,6 +41,7 @@ class GaitPlanner:
             self.controller.set_pose(TROT[i])
             self.controller.set_speed(TROT_SPEED[i])
             self.controller.update()
+            #self.correct()
             time.sleep(0.15)
 
 
@@ -75,7 +71,18 @@ class GaitPlanner:
         self.controller.rest()
         self.controller.update_simultaneously()
 
+    def set_pitch(self, pitch, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
 
+        motors = [1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0]    # motors and directions to actuate
+        motors = [i*pitch for i in motors]
+        self.controller.change_pose(motors)
+        self.controller.update()
+
+        if speed:
+            self.controller.set_speed(original_speed)
 
 
 
