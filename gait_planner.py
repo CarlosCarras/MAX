@@ -17,6 +17,8 @@ TROT = [[155.0,  35.0, 110.0, 45.0, 200.0,  55.0, 160.0,  25.0, 145.0, 120.0, 16
         [155.0,  35.0, 110.0, 75.0, 150.0,  55.0, 130.0,  75.0, 145.0, 120.0, 160.0,  20.0],
         [155.0,  35.0, 110.0, 65.0, 180.0,  55.0, 140.0,  45.0, 145.0, 120.0, 160.0,  20.0]]
 
+TROT_SPEED = [0.01, 0.01, 0.01, 0.005]
+
 BOW = [0, 0, 0, -20, 20, 0, 0, 0, 0, 0, 0, 0]
 BODY_ROLL = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -37,9 +39,11 @@ class GaitPlanner:
         if gait is GAIT_TROT:
             self.gait = GAIT_TROT
 
+
     def trot(self):
         for i in range(len(TROT)):
             self.controller.set_pose(TROT[i])
+            self.controller.set_speed(TROT_SPEED[i])
             self.controller.update()
             time.sleep(0.15)
 
