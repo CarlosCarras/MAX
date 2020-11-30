@@ -56,7 +56,7 @@ class Controller:
             self.servos[i].update()
 
     def update_simultaneously(self):
-        for i in range(5):
+        for i in range(20):
             self.clk()
 
     def stand(self):
