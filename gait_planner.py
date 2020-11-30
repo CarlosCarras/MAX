@@ -47,7 +47,7 @@ class GaitPlanner:
         for i in range(len(TROT)):
             self.controller.set_pose(TROT[i])
             self.controller.set_speed(TROT_SPEED[i])
-            self.controller.update()
+            self.controller.update_simultaneously()
             time.sleep(0.15)
 
 
@@ -72,11 +72,11 @@ class GaitPlanner:
 
     def stand(self):
         self.controller.stand()
-        self.controller.update()
+        self.controller.update_simultaneously()
 
     def rest(self):
         self.controller.rest()
-        self.controller.update()
+        self.controller.update_simultaneously()
 
 
 
