@@ -84,6 +84,19 @@ class GaitPlanner:
         if speed:
             self.controller.set_speed(original_speed)
 
+    def set_height(self, height, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
+
+        motors = [1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0]    # motors to actuate
+        motors = [i*height for i in motors]
+        self.controller.change_pose(motors)
+        self.controller.update()
+
+        if speed:
+            self.controller.set_speed(original_speed)
+
 
 
 

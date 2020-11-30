@@ -34,9 +34,10 @@ def main():
     move = gait_planner.GaitPlanner(controller)
     calibrate_servos.calibrate(controller)
 
-    move.set_pitch(20)
+    move.set_height(20)
     time.sleep(5)
-
+    move.set_height(-20)
+    time.sleep(5)
     move.walk_forward(30)
     #move.photo_pose(10)
 
