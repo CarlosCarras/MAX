@@ -126,8 +126,8 @@ class AMG88XX:
            sensor."""
         pixels = [[0] * self.AMG8833_PIXEL_ARRAY_WIDTH for _ in range(self.AMG8833_PIXEL_ARRAY_HEIGHT)]
 
-        for row in range(0, self.AMG8833_PIXEL_ARRAY_HEIGHT):
-            for col in range(0, self.AMG8833_PIXEL_ARRAY_WIDTH):
+        for row in range(self.AMG8833_PIXEL_ARRAY_HEIGHT):
+            for col in range(self.AMG8833_PIXEL_ARRAY_WIDTH):
                 reg = row * self.AMG8833_PIXEL_ARRAY_HEIGHT + col
                 raw = self.read_bytes(reg, 2)
                 reading = raw[0] << 8 | raw[1]
