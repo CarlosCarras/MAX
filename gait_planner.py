@@ -38,10 +38,9 @@ class GaitPlanner:
 
     def trot(self):
         for i in range(len(TROT)):
-            for j in range(len(TROT[0])):
-                self.controller.set_pose(TROT[i][j])
-                time.sleep(0.3)
+            self.controller.set_pose(TROT[i])
             self.controller.update()
+            time.sleep(0.3)
 
 
     def step(self):
