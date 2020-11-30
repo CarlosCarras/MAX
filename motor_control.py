@@ -62,12 +62,10 @@ class Controller:
     def stand(self):
         for i in range(self.num_servos):
             self.servos[i].stand()
-        self.update()
 
     def rest(self):
         for i in range(self.num_servos):
             self.servos[i].rest()
-        self.update()
 
     def set_pose(self, angles):
         for i in range(self.num_servos):
