@@ -37,6 +37,6 @@ def main():
     calibrate_servos.calibrate(controller)
 
     #perception.point_hotspot(60)
-    move.walk_forward(30)
+    move.stretch()
 
 main()
