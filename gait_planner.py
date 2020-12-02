@@ -121,8 +121,8 @@ class GaitPlanner:
             self.sidestep_in(LEG_RL)
             self.stand()
             self.sidestep_in(LEG_FL)
-            self.controller.sevos[5].stand()
-            self.controller.sevos[5].update()
+            self.controller.servos[5].stand()
+            self.controller.servos[5].update()
 
     def walk_left(self, dur):
         self.stand()
@@ -135,8 +135,8 @@ class GaitPlanner:
             self.sidestep_in(LEG_RR)
             self.stand()
             self.sidestep_in(LEG_FR)
-            self.controller.sevos[2].stand()
-            self.controller.sevos[2].update()
+            self.controller.servos[2].stand()
+            self.controller.servos[2].update()
         self.stand()
 
 
