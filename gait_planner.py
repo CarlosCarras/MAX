@@ -112,12 +112,12 @@ class GaitPlanner:
 
     def stand(self):
         self.controller.stand()
-        self.controller.update_simultaneously()
+        self.controller.update()
 
 
     def rest(self):
         self.controller.rest()
-        self.controller.update_simultaneously()
+        self.controller.update()
 
 
     def set_pitch(self, pitch, speed=None):
