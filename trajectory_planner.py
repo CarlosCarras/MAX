@@ -17,18 +17,19 @@ class TrajectoryPlanner():
         else:
             return 1
 
-    def point_hotspot(self, dur=None):
+    def point_hotspot(self, dur=None, angle=20):
         if not dur: dur = 0.05
+        if not angle: angle = 20
         last_dir = None
 
         start_time = time.time()
         while time.time() - start_time < dur:
             dir = self.get_hotspot_dir()
             motor = dir*3
-            angle = -20*dir - 20*(dir-1)
+            deg = -angle*dir - angle*(dir-1)
             if last_dir is not dir:
                 self.controller.stand()
-                self.controller.point(motor, angle)
+                self.controller.point(motor, deg)
             last_dir = dir
             time.sleep(1)
 

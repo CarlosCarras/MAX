@@ -4,15 +4,18 @@ from threading import Timer
 
 
 GAIT_TROT = 0x00
-STEP_FORWARD_RIGHT = 0
-STEP_FORWARD_LEFT = 1
+
+LEG_FR = 0
+LEG_FL = 1
+LEG_RR = 2
+LEG_RL = 3
 
 TROT = [[155.0,  35.0, 110.0, 45.0, 200.0,  55.0, 160.0,  25.0, 145.0, 120.0, 160.0,  20.0],
         [155.0,  35.0, 110.0, 45.0, 150.0,  55.0, 160.0,  75.0, 145.0, 120.0, 160.0,  20.0],
         [155.0,  35.0, 110.0, 75.0, 150.0,  55.0, 130.0,  75.0, 145.0, 120.0, 160.0,  20.0],
         [175.0,  15.0, 110.0, 65.0, 180.0,  55.0, 140.0,  45.0, 145.0, 100.0, 180.0,  20.0],
         [175.0,  65.0, 110.0, 65.0, 180.0,  55.0, 140.0,  45.0, 145.0, 100.0, 130.0,  20.0],
-        [155.0,  65.0, 110.0, 45.0, 200.0,  55.0, 160.0,  25.0, 145.0, 130.0, 130.0,  20.0]]
+        [155.0,  65.0, 110.0, 45.0, 200.0,  55.0, 160.0,  25.0, 145.0, 120.0, 130.0,  20.0]]
 
 TROT_SPEED = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
 
@@ -36,14 +39,45 @@ class GaitPlanner:
             self.gait = GAIT_TROT
 
 
-    def trot(self):
-        for i in range(len(TROT)):
-            self.controller.set_pose(TROT[i])
-            self.controller.set_speed(TROT_SPEED[i])
+    def execute_step(self, steps, speed=None, increment=False, sleep_dur=0.15):
+        for i in range(len(steps)):
+            if increment:
+                self.controller.change_pose(steps[i])
+            else:
+                self.controller.set_pose(steps[i])
+            if speed:
+                self.controller.set_speed(speed[i])
             self.controller.update()
-            #self.correct()
-            time.sleep(0.15)
+            time.sleep(sleep_dur)
 
+
+    def trot(self):
+        self.execute_step(TROT, TROT_SPEED)
+
+
+    def raise_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
+        step = [0] * 12
+        step[leg*3] = angle*(1 - 2*(leg%2))
+        step[leg*3+1] = -1 * step[leg*3]
+        self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
+
+    def swing(self, leg, angle=20, speed=None, sleep_dur=0.15):
+        step = [0] * 12
+        if leg == 2 or leg == 3:
+            step[leg*3+2] = angle
+        elif leg == 1 or leg == 4:
+            step[leg*3+2] = -angle
+
+    def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
+        self.raise_leg(leg, -angle, speed, sleep_dur)
+
+
+    def sidestep(self):
+        for leg in range(4):
+            self.raise_leg(leg)
+            self.swing(leg)
+            self.lower_leg(leg)
+            time.sleep(0.2)
 
     def step(self):
         if time.time() - self.step_time < self.wait_time:
@@ -119,6 +153,7 @@ class GaitPlanner:
     def point(self, motor=0, angle=20):
         self.controller.servos[motor].increment_goal(angle)
         self.controller.update()
+
 
 
 
