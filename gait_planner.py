@@ -44,8 +44,7 @@ class GaitPlanner:
             self.controller.change_pose(steps)
         else:
             self.controller.set_pose(steps)
-        if speed:
-          self.controller.set_speed(speed)
+        if speed is not None: self.controller.set_speed(speed)
         self.controller.update()
         time.sleep(sleep_dur)
 
