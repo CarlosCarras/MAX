@@ -40,9 +40,7 @@ def main():
     time.sleep(5)
     move.cower()
     time.sleep(5)
-    move.stand()
-    time.sleep(5)
-    move.intimidate()
+    move.walk_left(10)
 
     #perception.point_hotspot(50)
     # dur = 20

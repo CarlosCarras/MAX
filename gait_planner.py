@@ -108,6 +108,31 @@ class GaitPlanner:
         start = time.time()
         while time.time() - start < dur:
             self.step()
+        self.stand()
+
+    def walk_right(self, dur):
+        self.stand()
+        time.sleep(1)
+
+        start = time.time()
+        while time.time() - start < dur:
+            self.sidestep_out(LEG_FR)
+            self.sidestep_out(LEG_RR)
+            self.sidestep_in(LEG_RL)
+            self.sidestep_in(LEG_FL)
+        self.stand()
+
+    def walk_left(self, dur):
+        self.stand()
+        time.sleep(1)
+
+        start = time.time()
+        while time.time() - start < dur:
+            self.sidestep_out(LEG_FL)
+            self.sidestep_out(LEG_RL)
+            self.sidestep_in(LEG_RR)
+            self.sidestep_in(LEG_FR)
+        self.stand()
 
 
     def stand(self):
