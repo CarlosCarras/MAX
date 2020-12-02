@@ -40,7 +40,6 @@ class GaitPlanner:
 
 
     def execute_step(self, steps, speed=None, increment=False, sleep_dur=0.15):
-        print(steps)      ############################
         if increment:
             self.controller.change_pose(steps)
         else:
@@ -62,7 +61,7 @@ class GaitPlanner:
         step[leg*3+1] = -1 * step[leg*3]
         self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
-    def swing(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def swing_out(self, leg, angle=20, speed=None, sleep_dur=0.15):
         step = [0] * 12
         if leg == 1 or leg == 2:
             step[leg*3+2] = angle
@@ -70,15 +69,21 @@ class GaitPlanner:
             step[leg*3+2] = -angle
         self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
+    def swing_in(self, leg, angle=20, speed=None, sleep_dur=0.15):
+        self.swing_out(leg, -angle, speed, sleep_dur)
+
     def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.raise_leg(leg, -angle, speed, sleep_dur)
 
+    def sidestep_out(self, leg, angle=20, speed=None, sleep_dur=0.15):
+        self.raise_leg(leg, angle, speed, sleep_dur)
+        self.swing_out(leg, angle, speed, sleep_dur)
+        self.lower_leg(leg, angle, speed, sleep_dur)
 
-    def sidestep(self):
-        for leg in range(4):
-            self.raise_leg(leg)
-            self.swing(leg)
-            self.lower_leg(leg)
+    def sidestep_in(self, leg, angle=20, speed=None, sleep_dur=None):
+        self.raise_leg(leg, angle, speed, sleep_dur)
+        self.swing_in(leg, angle, speed, sleep_dur)
+        self.lower_leg(leg, angle, speed, sleep_dur)
 
     def step(self):
         if time.time() - self.step_time < self.wait_time:
@@ -155,6 +160,13 @@ class GaitPlanner:
         self.controller.servos[motor].increment_goal(angle)
         self.controller.update()
 
+    def intimidate(self, angle=20):
+        for leg in range(4):
+            self.sidestep_out(leg, angle)
+
+    def cower(self, angle=20):
+        for leg in range(4):
+            self.sidestep_in(leg, angle)
 
 
 

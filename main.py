@@ -36,8 +36,10 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
-    move.sidestep()
-    time.sleep(20)
+    move.cower()
+    time.sleep(5)
+    move.intimidate()
+
     #perception.point_hotspot(50)
     # dur = 20
     # start_time = time.time()
