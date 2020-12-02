@@ -44,7 +44,7 @@ class GaitPlanner:
             self.controller.change_pose(steps)
         else:
             self.controller.set_pose(steps)
-        if speed is not None: self.controller.set_speed(speed)
+        if speed: self.controller.set_speed(speed)
         self.controller.update()
         time.sleep(sleep_dur)
 
@@ -60,33 +60,35 @@ class GaitPlanner:
         step[leg*3+1] = -1 * step[leg*3]
         self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
+
     def swing_out(self, leg, angle=20, speed=None, sleep_dur=0.15):
         step = [0] * 12
         if leg == 1 or leg == 2:
             step[leg*3+2] = angle
         elif leg == 0 or leg == 3:
             step[leg*3+2] = -angle
+        self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
-        if speed is not None:
-            self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
-        else:
-            self.execute_step(steps=step, increment=True, sleep_dur=sleep_dur)
 
     def swing_in(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.swing_out(leg, -angle, speed, sleep_dur)
 
+
     def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.raise_leg(leg, -angle, speed, sleep_dur)
+
 
     def sidestep_out(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.raise_leg(leg, angle, speed, sleep_dur)
         self.swing_out(leg, angle, speed, sleep_dur)
         self.lower_leg(leg, angle, speed, sleep_dur)
 
-    def sidestep_in(self, leg, angle=20, speed=None, sleep_dur=None):
+
+    def sidestep_in(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.raise_leg(leg, angle, speed, sleep_dur)
         self.swing_in(leg, angle, speed, sleep_dur)
         self.lower_leg(leg, angle, speed, sleep_dur)
+
 
     def step(self):
         if time.time() - self.step_time < self.wait_time:
@@ -98,6 +100,7 @@ class GaitPlanner:
             return
         #Timer(0.5, self.lower_legs, legs).start()
 
+
     def walk_forward(self, dur):
         self.stand()
         time.sleep(1)
@@ -106,13 +109,16 @@ class GaitPlanner:
         while time.time() - start < dur:
             self.step()
 
+
     def stand(self):
         self.controller.stand()
         self.controller.update_simultaneously()
 
+
     def rest(self):
         self.controller.rest()
         self.controller.update_simultaneously()
+
 
     def set_pitch(self, pitch, speed=None):
         if speed:
@@ -127,6 +133,7 @@ class GaitPlanner:
         if speed:
             self.controller.set_speed(original_speed)
 
+
     def set_height(self, height, speed=None):
         if speed:
             original_speed = self.controller.get_speed()
@@ -139,6 +146,7 @@ class GaitPlanner:
 
         if speed:
             self.controller.set_speed(original_speed)
+
 
     def stretch(self, dur=16, deg=20, speed=None):
         sleep_time = dur/8
@@ -159,13 +167,16 @@ class GaitPlanner:
         self.stand()
         time.sleep(sleep_time)
 
+
     def point(self, motor=0, angle=20):
         self.controller.servos[motor].increment_goal(angle)
         self.controller.update()
 
+
     def intimidate(self, angle=20):
         for leg in range(4):
             self.sidestep_out(leg, angle)
+
 
     def cower(self, angle=20):
         for leg in range(4):

@@ -38,6 +38,8 @@ def main():
 
     move.cower()
     time.sleep(5)
+    move.stand()
+    time.sleep(5)
     move.intimidate()
 
     #perception.point_hotspot(50)
