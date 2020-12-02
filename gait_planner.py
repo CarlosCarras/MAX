@@ -64,13 +64,10 @@ class GaitPlanner:
 
     def swing(self, leg, angle=20, speed=None, sleep_dur=0.15):
         step = [0] * 12
-        print(leg)
         if leg == 1 or leg == 2:
             step[leg*3+2] = angle
-            print(angle)
         elif leg == 0 or leg == 3:
             step[leg*3+2] = -angle
-            print(angle)
         self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
     def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
