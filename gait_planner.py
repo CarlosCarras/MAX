@@ -66,7 +66,11 @@ class GaitPlanner:
             step[leg*3+2] = angle
         elif leg == 0 or leg == 3:
             step[leg*3+2] = -angle
-        self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
+
+        if speed is not None:
+            self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
+        else:
+            self.execute_step(steps=step, increment=True, sleep_dur=sleep_dur)
 
     def swing_in(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.swing_out(leg, -angle, speed, sleep_dur)
