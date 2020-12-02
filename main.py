@@ -36,6 +36,8 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
+    move.stand()
+    time.sleep(5)
     move.cower()
     time.sleep(5)
     move.stand()
