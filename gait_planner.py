@@ -42,17 +42,18 @@ class GaitPlanner:
     def execute_step(self, steps, speed=None, increment=False, sleep_dur=0.15):
         for i in range(len(steps)):
             if increment:
-                self.controller.change_pose(steps[i])
+                self.controller.change_pose(steps)
             else:
-                self.controller.set_pose(steps[i])
+                self.controller.set_pose(steps)
             if speed:
-                self.controller.set_speed(speed[i])
+                self.controller.set_speed(speed)
             self.controller.update()
             time.sleep(sleep_dur)
 
 
     def trot(self):
-        self.execute_step(TROT, TROT_SPEED)
+        for row in TROT_SPEED:
+            self.execute_step(TROT, row)
 
 
     def raise_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
@@ -67,6 +68,7 @@ class GaitPlanner:
             step[leg*3+2] = angle
         elif leg == 1 or leg == 4:
             step[leg*3+2] = -angle
+        self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
     def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
         self.raise_leg(leg, -angle, speed, sleep_dur)
@@ -77,7 +79,6 @@ class GaitPlanner:
             self.raise_leg(leg)
             self.swing(leg)
             self.lower_leg(leg)
-            time.sleep(0.2)
 
     def step(self):
         if time.time() - self.step_time < self.wait_time:
