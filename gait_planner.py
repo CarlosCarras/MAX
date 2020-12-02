@@ -40,20 +40,20 @@ class GaitPlanner:
 
 
     def execute_step(self, steps, speed=None, increment=False, sleep_dur=0.15):
-        for i in range(len(steps)):
-            if increment:
-                self.controller.change_pose(steps)
-            else:
-                self.controller.set_pose(steps)
-            if speed:
-                self.controller.set_speed(speed)
-            self.controller.update()
-            time.sleep(sleep_dur)
+        print(steps)      ############################
+        if increment:
+            self.controller.change_pose(steps)
+        else:
+            self.controller.set_pose(steps)
+        if speed:
+          self.controller.set_speed(speed)
+        self.controller.update()
+        time.sleep(sleep_dur)
 
 
     def trot(self):
-        for row in TROT_SPEED:
-            self.execute_step(TROT, row)
+        for row in TROT:
+            self.execute_step(row, TROT_SPEED)
 
 
     def raise_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
