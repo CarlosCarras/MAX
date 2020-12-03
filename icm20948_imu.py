@@ -164,9 +164,10 @@ I2C_SLV0_RNW_bm               = 1 <<  7         # USR3 I2C_SLV0_ADDR: transfer i
 
 class ICM20948:
 
-    def __init__(self, bus=1, address=ICM20948_ADDR):
+    def __init__(self, bus=1, address=ICM20948_ADDR, use_mag=False):
         self._address = address
         self._bus = SMBus(bus)
+        self.use_mag = use_mag
 
         self.bank(0)
         self.wake()
@@ -185,16 +186,17 @@ class ICM20948:
         self.bank(0)
         self.write(ICM20948_USR0_INT_PIN_CFG, 0x30)
 
-        self.bank(3)
-        self.write(ICM20948_USR3_I2C_MST_CTRL, 0x4D)
-        self.write(ICM20948_USR3_I2C_MST_DELAY_CTRL, 0x01)
+        if self.use_mag:
+            self.bank(3)
+            self.write(ICM20948_USR3_I2C_MST_CTRL, 0x4D)
+            self.write(ICM20948_USR3_I2C_MST_DELAY_CTRL, 0x01)
 
-        if not self.mag_read(AK09916_WIA) == AK09916_CHIP_ID:
-            raise RuntimeError("Unable to find AK09916")
+            if not self.mag_read(AK09916_WIA) == AK09916_CHIP_ID:
+                raise RuntimeError("Unable to find AK09916")
 
-        self.mag_write(AK09916_CNTL3, 0x01)                 # reset the magnetometer
-        while self.mag_read(AK09916_CNTL3) == 0x01:
-            time.sleep(0.0001)
+            self.mag_write(AK09916_CNTL3, 0x01)                 # reset the magnetometer
+            while self.mag_read(AK09916_CNTL3) == 0x01:
+                time.sleep(0.0001)
 
 
     #----------------------------- I2C  Utilites -----------------------------#
@@ -386,7 +388,10 @@ class ICM20948:
     def get_all_data(self):
         ax, ay, az = self.get_accel_data()
         gx, gy, gz = self.get_gyro_data()
-        mx, my, mz = self.get_mag_data()
         temperature = self.get_temperature()
 
-        return ax, ay, az, gx, gy, gz, mx, my, mz, temperature
+        if self.use_mag:
+            mx, my, mz = self.get_mag_data()
+            return ax, ay, az, gx, gy, gz, mx, my, mz, temperature
+        else:
+            return ax, ay, az, gx, gy, gz, temperature
