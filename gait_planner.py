@@ -139,7 +139,6 @@ class GaitPlanner:
         while time.time() - start < dur:
             self.step_left()
 
-
     def stand(self):
         self.controller.stand()
         self.controller.update()
