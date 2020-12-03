@@ -132,8 +132,8 @@ class IMU:
     def get_rpy(self):
         ax, ay, az = self.imu.get_accel_data()
         gx, gy, gz = self.imu.get_gyro_data()
-        print('AX: ' + str(ax) + ', AY: ' + str(ay) + ', AZ: ' + str(az))
-        print('GX: ' + str(gx) + ', GY: ' + str(gy) + ', GZ: ' + str(gz))
+        #print('AX: ' + str(ax) + ', AY: ' + str(ay) + ', AZ: ' + str(az))
+        #print('GX: ' + str(gx) + ', GY: ' + str(gy) + ', GZ: ' + str(gz))
         #mx, my, mz = self.imu.get_mag_data()
 
         current_time = time.time()                          # get current time (s)
