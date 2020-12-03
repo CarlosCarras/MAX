@@ -28,7 +28,7 @@ def initialize_servos(controller):
 def main():
     print('\n...Initializing MAX...\n')
 
-    imu = max_imu.IMU()
+    #imu = max_imu.IMU()
     camera = thermal_cam.ThermalCam()
     controller = motor_control.Controller()
     initialize_servos(controller)
