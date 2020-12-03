@@ -75,7 +75,7 @@ class ThermalCam:
             for jx in range(self.width):
                 pixel = pixels[ix][jx]
                 color_index = int(round((pixel - self.current_min_pixel_temp)))
-                print(color_index)
+
                 if color_index < 0:
                     color_index = 0
                 if color_index > len(CONSOLE_COLORS) - 1:
