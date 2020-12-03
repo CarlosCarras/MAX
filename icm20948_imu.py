@@ -172,7 +172,7 @@ class ICM20948:
         if not self.read(ICM20948_USR0_WHO_AM_I) == ICM20948_CHIP_ID:
             raise RuntimeError("Unable to find ICM20948")
 
-        self.wake()
+        #self.wake()
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
         time.sleep(0.01)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
