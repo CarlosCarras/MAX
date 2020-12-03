@@ -34,7 +34,7 @@ def main():
     controller = motor_control.Controller()
     initialize_servos(controller)
 
-    move = gait_planner.GaitPlanner(controller)
+    move = gait_planner.GaitPlanner(controller, imu)
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
