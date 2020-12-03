@@ -15,14 +15,14 @@ https://github.com/OpenQuadruped/spot_mini_mini/blob/spot/spot_real/Control/RPi/
 import math
 import numpy as np
 import time
-import icm20948
+import icm20948_imu
 
 
 class IMU:
 
     def __init__(self, bus=1):
         self._bus = bus
-        self.imu = icm20948.ICM20948(bus)
+        self.imu = icm20948_imu.ICM20948(bus)
 
         self.imu_dt = 0
         self.roll_int = 0
@@ -86,8 +86,8 @@ class IMU:
 
     def calibrate_magnetometer(self):
         collection_time = 5.0               # get 10 seconds of magnemometer data
-        mag_x_max = mag_y_max = mag_z_max = -icm20948.AK09916_RESOLUTION
-        mag_x_min = mag_y_min = mag_z_min = icm20948.AK09916_RESOLUTION
+        mag_x_max = mag_y_max = mag_z_max = -icm20948_imu.AK09916_RESOLUTION
+        mag_x_min = mag_y_min = mag_z_min = icm20948_imu.AK09916_RESOLUTION
 
         input("Starting magnetometer calibration for " + str(collection_time) + " seconds.")
         start_time = time.time()

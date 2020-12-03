@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-filename: icm20948.py
+filename: icm20948_imu.py
 author:   Carlos Carrasquillo
 created:  October 24, 2020
 modified: October 25, 2020
@@ -11,7 +11,7 @@ purpose:  This file reads accelerometer, gyroscope, and magnetometer data from t
 
 datasheet: Invensense DS-000189, Rev. 1.3
 
-discloure: This code was modeled after Gadgetoid's icm20948.py file, which can be found at,
+discloure: This code was modeled after Gadgetoid's icm20948_imu.py file, which can be found at,
 https://github.com/pimoroni/icm20948-python/blob/master/library/icm20948/__init__.py
 """
 
@@ -197,9 +197,8 @@ class ICM20948:
             raise RuntimeError("Unable to find AK09916")
 
         self.mag_write(AK09916_CNTL3, 0x01)                 # reset the magnetometer
-        #while self.mag_read(AK09916_CNTL3) == 0x01:
-            #time.sleep(0.0001)
-        time.sleep(0.01)
+        while self.mag_read(AK09916_CNTL3) == 0x01:
+            time.sleep(0.0001)
 
 
     #----------------------------- I2C  Utilites -----------------------------#
@@ -218,7 +217,7 @@ class ICM20948:
         if not self.bank == bank_num:
             self.write(ICM20948_BANK_SEL, bank_num << 4)
             self._bank = bank_num
-            time.sleep(0.01)
+            time.sleep(0.001)
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """

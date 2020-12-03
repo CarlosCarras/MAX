@@ -5,6 +5,7 @@ import thermal_cam
 import gait_planner
 import trajectory_planner
 import max_imu
+from icm20948 import ICM20948
 import time
 
 
@@ -36,5 +37,6 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
+    icm20948 = ICM20948()
 
 main()
