@@ -5,7 +5,7 @@ import thermal_cam
 import gait_planner
 import trajectory_planner
 import max_imu
-from icm20948 import ICM20948
+import max_health
 import time
 
 
@@ -30,11 +30,14 @@ def main():
 
     imu = max_imu.IMU()
     camera = thermal_cam.ThermalCam()
+    health = max_health.HealthCheck(imu, camera)
     controller = motor_control.Controller()
     initialize_servos(controller)
 
     move = gait_planner.GaitPlanner(controller)
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
+
+    health.status()
 
 main()

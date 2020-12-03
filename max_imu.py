@@ -22,7 +22,7 @@ class IMU:
 
     def __init__(self, bus=1):
         self._bus = bus
-        self.imu = icm20948_imu.ICM20948(bus, use_mag=True)
+        self.imu = icm20948_imu.ICM20948(bus)
 
         self.imu_dt = 0
         self.roll_int = 0
@@ -51,7 +51,10 @@ class IMU:
         self.yaw_bias = 0
 
         self.calibrate_imu()
-        self.calibrate_magnetometer()
+        #self.calibrate_magnetometer()
+
+    def get_temperature(self):
+        return self.imu.get_temperature()
 
     def calibrate_imu(self):
         self.gx_calibration = 0
@@ -129,7 +132,7 @@ class IMU:
     def get_rpy(self):
         ax, ay, az = self.imu.get_accel_data()
         gx, gy, gz = self.imu.get_gyro_data()
-        mx, my, mz = self.imu.get_mag_data()
+        #mx, my, mz = self.imu.get_mag_data()
 
         current_time = time.time()                          # get current time (s)
         self.imu_dt = current_time - self.prev_time         # compute dt
@@ -148,13 +151,13 @@ class IMU:
 
         roll_accel  = 180.0 * math.atan2(ay, ax) / np.pi - self.roll_calibration        # acclerometer Y, Z
         pitch_accel = 180.0 * math.atan2(ax, az) / np.pi - self.pitch_calibration       # acclerometer X, Z
-        yaw_mag = 180.0 * (math.atan2(my, mx) / np.pi)                                  # magnetometer Y, X
+        #yaw_mag = 180.0 * (math.atan2(my, mx) / np.pi)                                 # magnetometer Y, X
 
         # calculate filtered Roll & Pitch (RP) data
         self.roll = roll_accel*self.comp_filter + (1-self.comp_filter)*(roll_gyro_dt + self.roll)
         self.pitch = pitch_accel*self.comp_filter + (1-self.comp_filter)*(pitch_gyro_dt + self.pitch)
-        self.yaw = yaw_mag - self.yaw_bias
-        self.yaw -= 360.0 * math.floor((self.yaw + 180) / 360.0)
+        #self.yaw = yaw_mag - self.yaw_bias
+        #self.yaw -= 360.0 * math.floor((self.yaw + 180) / 360.0)
 
         return self.roll, self.pitch, self.yaw
 

@@ -120,5 +120,8 @@ class ThermalCam:
     def get_current_color_range(self):
         return self.get_current_heat_range() / len(CONSOLE_COLORS)
 
+    def get_temperature(self):
+        return self.amg8833.get_temperature()
+
 
 
