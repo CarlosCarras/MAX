@@ -18,6 +18,7 @@ https://github.com/adafruit/Adafruit_AMG88xx/blob/master/Adafruit_AMG88xx.cpp
 
 import sys
 import math
+import time
 from colour import Color
 import amg88xx
 
@@ -95,6 +96,11 @@ class ThermalCam:
             y_console += 1
 
         sys.stdout.flush()
+
+    def test(self, rate=10):
+        while True:
+            self.show()
+            time.sleep(1/rate)
 
     def get_heat_range(self):
         return self.max_pixel_temp - self.min_pixel_temp
