@@ -111,7 +111,9 @@ class AMG88XX:
         return self._bus.read_byte_data(self._address, register)
 
     def read_bytes(self, register, num_bytes):
-        return self._bus.read_i2c_block_data(self._address, register, num_bytes)
+        data = self._bus.read_i2c_block_data(self._address, register, num_bytes)
+        print(data)
+        return data
 
     # ------------------------------- AMG8833  --------------------------------#
     def get_temperature(self):
