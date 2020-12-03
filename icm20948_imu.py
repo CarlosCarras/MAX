@@ -169,13 +169,9 @@ class ICM20948:
         self._bus = SMBus(bus)
 
         self.bank(0)
+        self.wake()
         if not self.read(ICM20948_USR0_WHO_AM_I) == ICM20948_CHIP_ID:
             raise RuntimeError("Unable to find ICM20948")
-
-        self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
-        self.wake()
-        time.sleep(0.01)
-        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
 
         self.bank(2)
         self.set_gyro_sample_rate(100)
@@ -221,8 +217,11 @@ class ICM20948:
             time.sleep(0.001)
 
     def wake(self):
-        self.write(ICM20948_USR0_PWR_MGMT_1, 0x40)
-        time.sleep(0.01)
+        self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
+        time.sleep(0.001)
+        self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
+        time.sleep(0.001)
+        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
