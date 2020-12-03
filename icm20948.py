@@ -197,8 +197,9 @@ class ICM20948:
             raise RuntimeError("Unable to find AK09916")
 
         self.mag_write(AK09916_CNTL3, 0x01)                 # reset the magnetometer
-        while self.mag_read(AK09916_CNTL3) == 0x01:
-            time.sleep(0.0001)
+        #while self.mag_read(AK09916_CNTL3) == 0x01:
+            #time.sleep(0.0001)
+        time.sleep(0.01)
 
 
     #----------------------------- I2C  Utilites -----------------------------#
@@ -217,6 +218,7 @@ class ICM20948:
         if not self.bank == bank_num:
             self.write(ICM20948_BANK_SEL, bank_num << 4)
             self._bank = bank_num
+            time.sleep(0.01)
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
