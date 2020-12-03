@@ -100,6 +100,25 @@ class GaitPlanner:
             return
         #Timer(0.5, self.lower_legs, legs).start()
 
+    def step_right(self):
+        self.stand()
+        self.sidestep_out(LEG_FR)
+        self.sidestep_out(LEG_RR)
+        self.sidestep_in(LEG_RL)
+        self.stand()
+        self.sidestep_in(LEG_FL)
+        self.controller.servos[5].stand()
+        self.controller.servos[5].update()
+
+    def step_left(self):
+        self.stand()
+        self.sidestep_out(LEG_FL)
+        self.sidestep_out(LEG_RL)
+        self.sidestep_in(LEG_RR)
+        self.stand()
+        self.sidestep_in(LEG_FR)
+        self.controller.servos[2].stand()
+        self.controller.servos[2].update()
 
     def walk_forward(self, dur):
         self.stand()
@@ -111,33 +130,14 @@ class GaitPlanner:
         self.stand()
 
     def walk_right(self, dur):
-        self.stand()
-        time.sleep(1)
-
         start = time.time()
         while time.time() - start < dur:
-            self.sidestep_out(LEG_FR)
-            self.sidestep_out(LEG_RR)
-            self.sidestep_in(LEG_RL)
-            self.stand()
-            self.sidestep_in(LEG_FL)
-            self.controller.servos[5].stand()
-            self.controller.servos[5].update()
+            self.step_right()
 
     def walk_left(self, dur):
-        self.stand()
-        time.sleep(1)
-
         start = time.time()
         while time.time() - start < dur:
-            self.sidestep_out(LEG_FL)
-            self.sidestep_out(LEG_RL)
-            self.sidestep_in(LEG_RR)
-            self.stand()
-            self.sidestep_in(LEG_FR)
-            self.controller.servos[2].stand()
-            self.controller.servos[2].update()
-        self.stand()
+            self.step_left()
 
 
     def stand(self):
