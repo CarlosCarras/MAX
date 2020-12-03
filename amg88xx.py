@@ -132,8 +132,6 @@ class AMG88XX:
                 raw = self.read_bytes(reg, 2)
                 print(str(raw[1]) + ' , ' + str(raw[0]))
                 reading = raw[1] << 8 | raw[0]
-                print(reading)
-                print(_twos_comp_to_float(reading))
                 pixels[row][col] = _twos_comp_to_float(reading) * self.AMG8833_PIXEL_TEMP_CONVERSION
 
         return pixels
