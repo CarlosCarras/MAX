@@ -96,6 +96,7 @@ class ThermalCam:
             y_console += 1
 
         sys.stdout.flush()
+        print(pixels)
 
     def test(self, rate=10):
         while True:
