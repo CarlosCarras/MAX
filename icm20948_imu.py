@@ -218,10 +218,8 @@ class ICM20948:
     def wake(self):
         self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
-        time.sleep(0.001)
-        self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
-        time.sleep(0.001)
-        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
+        time.sleep(0.01)
+        self.write(ICM20948_USR0_PWR_MGMT_2, 0x01)
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
