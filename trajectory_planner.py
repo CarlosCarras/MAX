@@ -12,7 +12,10 @@ class TrajectoryPlanner():
 
         pixels = np.array(self.camera.get_pixels())
         pixels = pixels.transpose()
-        if np.argmax(pixels) < self.camera.num_pixels / 2:
+
+        left_avg = np.mean(pixels[0:3,:])
+        right_avg = np.mean(pixels[4:7, :])
+        if left_avg >  right_avg:
             return 0
         else:
             return 1
