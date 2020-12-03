@@ -169,16 +169,13 @@ class ICM20948:
         self._bus = SMBus(bus)
         self.use_mag = use_mag
 
-        self.bank(0)
         self.wake()
         if not self.read(ICM20948_USR0_WHO_AM_I) == ICM20948_CHIP_ID:
             raise RuntimeError("Unable to find ICM20948")
 
-        self.bank(2)
         self.set_gyro_sample_rate(100)
         self.set_gyro_low_pass(enabled=True, mode=5)
         self.set_gyro_full_scale(250)
-
         self.set_accel_sample_rate(125)
         self.set_accel_low_pass(enabled=True, mode=5)
         self.set_accel_scale(16)
@@ -219,6 +216,7 @@ class ICM20948:
             time.sleep(0.001)
 
     def wake(self):
+        self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
         time.sleep(0.001)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
