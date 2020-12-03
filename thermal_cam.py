@@ -79,7 +79,7 @@ class ThermalCam:
 
                 color_index = 0
                 if self.current_color_range != 0:
-                    color_index = int(round((pixel - self.current_min_pixel_temp))/self.current_color_range)
+                    color_index = int(round((pixel - self.current_min_pixel_temp)/self.current_color_range))
 
                 if color_index < 0:
                     color_index = 0
