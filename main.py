@@ -7,9 +7,6 @@ import trajectory_planner
 import max_imu
 import time
 
-import amg88xx_test
-import subprocess
-
 
 stand_angles = [155.0,  35.0, 110.0,
                  65.0, 180.0,  55.0,
@@ -39,8 +36,7 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
-    subprocess.call("amg88xx_test.py", shell=True)
-
+    camera.show()
     #perception.point_hotspot(50)
     # dur = 20
     # start_time = time.time()

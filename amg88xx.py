@@ -104,7 +104,7 @@ class AMG88XX:
     def write_bit(self, register, bit, val):
         bitmask = (val & 0b1) << bit
         data = self._bus.read_byte_data(self._address, register)
-        data = data | bitmask
+        data |= bitmask
         self._bus.write_byte_data(self._address, register, data)
 
     def read(self, register):
@@ -128,9 +128,9 @@ class AMG88XX:
 
         for row in range(self.AMG8833_PIXEL_ARRAY_HEIGHT):
             for col in range(self.AMG8833_PIXEL_ARRAY_WIDTH):
-                reg = row * self.AMG8833_PIXEL_ARRAY_HEIGHT + col
+                reg = AMG88XX_PIXEL_OFFSET + (row * self.AMG8833_PIXEL_ARRAY_HEIGHT + col)
                 raw = self.read_bytes(reg, 2)
-                reading = raw[0] << 8 | raw[1]
+                reading = raw[1] << 8 | raw[0]
                 pixels[row][col] = _twos_comp_to_float(reading) * self.AMG8833_PIXEL_TEMP_CONVERSION
 
         return pixels
