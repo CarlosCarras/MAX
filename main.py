@@ -36,12 +36,6 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
-    perception.point_hotspot(30)
-    #perception.point_hotspot(50)
-    # dur = 20
-    # start_time = time.time()
-    # while time.time() - start_time < dur:
-    #     print('--------------------------------------------')
-    #     print(camera.get_pixels())
+    perception.track_hotspot(30)
 
 main()

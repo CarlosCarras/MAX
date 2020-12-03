@@ -15,10 +15,19 @@ class TrajectoryPlanner():
 
         left_avg = np.mean(pixels[0:3,:])
         right_avg = np.mean(pixels[4:7, :])
-        if left_avg >  right_avg:
+        if left_avg <  right_avg:
             return 0
         else:
             return 1
+
+    def track_hotspot(self, dur, avoid=False):
+        dir = self.get_hotspot_dir()
+        if avoid: dir = not dir
+
+        if dir == 0:
+            self.controller.walk_right(dur)
+        else:
+            self.controller.walk_left(dur)
 
     def point_hotspot(self, dur=None, angle=20):
         if not dur: dur = 0.05
