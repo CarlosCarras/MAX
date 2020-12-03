@@ -21,13 +21,15 @@ class TrajectoryPlanner():
             return 1
 
     def track_hotspot(self, dur, avoid=False):
-        dir = self.get_hotspot_dir()
-        if avoid: dir = not dir
+        start_time = time.time()
+        while time.time() - start_time < dur:
+            dir = self.get_hotspot_dir()
+            if avoid: dir = not dir
 
-        if dir == 0:
-            self.controller.step_right(dur)
-        else:
-            self.controller.step_left(dur)
+            if dir == 0:
+                self.controller.step_right()
+            else:
+                self.controller.step_left()
 
     def point_hotspot(self, dur=None, angle=20):
         if not dur: dur = 0.05
