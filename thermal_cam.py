@@ -41,6 +41,7 @@ class ThermalCam:
         self.max_pixel_temp = 0
         self.current_min_pixel_temp = 0
         self.current_max_pixel_temp = 0
+        self.current_color_range = 1
 
         self.points = [(math.floor(i / self.width), (i % self.height)) for i in range(0, self.width * self.height)]
 
@@ -65,7 +66,6 @@ class ThermalCam:
     def show(self):
         pixels = self.get_pixels()
         pixels = self.get_mapping(pixels)
-        print(pixels)
 
         self.current_max_pixel_temp = 0
         self.current_min_pixel_temp = 0
@@ -75,7 +75,10 @@ class ThermalCam:
             x_console = 2
             for jx in range(self.width):
                 pixel = pixels[ix][jx]
-                color_index = int(round((pixel - self.current_min_pixel_temp)))
+
+                color_index = 0
+                if self.current_color_range != 0:
+                    color_index = int(round((pixel - self.current_min_pixel_temp))/self.current_color_range)
 
                 if color_index < 0:
                     color_index = 0
@@ -97,6 +100,7 @@ class ThermalCam:
             y_console += 1
 
         sys.stdout.flush()
+        self.current_color_range = self.get_current_color_range()
 
     def test(self, rate=10):
         while True:
