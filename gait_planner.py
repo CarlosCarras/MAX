@@ -217,8 +217,8 @@ class GaitPlanner:
 
     def imu_test(self):
         while True:
-            roll, pitch = self.imu.get_rpy()
-            print(roll, pitch)
+            roll, pitch, yaw = self.imu.get_rpy()
+            print('Roll:' + str(roll) + 'Pitch:' + str(pitch))
             time.sleep(0.3)
 
 
