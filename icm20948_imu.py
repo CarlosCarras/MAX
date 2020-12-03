@@ -213,7 +213,7 @@ class ICM20948:
         if not self.bank == bank_num:
             self.write(ICM20948_BANK_SEL, bank_num << 4)
             self._bank = bank_num
-            time.sleep(0.001)
+            time.sleep(0.01)
 
     def wake(self):
         self.bank(0)

@@ -22,7 +22,7 @@ class IMU:
 
     def __init__(self, bus=1):
         self._bus = bus
-        self.imu = icm20948_imu.ICM20948(bus)
+        self.imu = icm20948_imu.ICM20948(bus, use_mag=True)
 
         self.imu_dt = 0
         self.roll_int = 0
@@ -91,11 +91,7 @@ class IMU:
 
         input("Starting magnetometer calibration for " + str(collection_time) + " seconds.")
         start_time = time.time()
-        elapsed_time = time.time() - start_time
-
-        while elapsed_time < collection_time:
-            elapsed_time = time.time() - start_time
-
+        while time.time() - start_time < collection_time:
             mx, my, mz = self.imu.get_mag_data()
 
             if mx > mag_x_max:
