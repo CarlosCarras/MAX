@@ -48,7 +48,6 @@ class ThermalCam:
         return self.amg8833.get_pixels()
 
     def map_temp(self, val):
-        print((val - self.min_temp))
         return (val - self.min_temp) * (COLORDEPTH - 1) / (self.max_temp - self.min_temp)
 
 
