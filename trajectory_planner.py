@@ -25,9 +25,9 @@ class TrajectoryPlanner():
         if avoid: dir = not dir
 
         if dir == 0:
-            self.controller.walk_right(dur)
+            self.controller.step_right(dur)
         else:
-            self.controller.walk_left(dur)
+            self.controller.step_left(dur)
 
     def point_hotspot(self, dur=None, angle=20):
         if not dur: dur = 0.05
