@@ -38,6 +38,6 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
-    health.status()
+    move.imu_test()
 
 main()
