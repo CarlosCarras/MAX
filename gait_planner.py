@@ -39,7 +39,7 @@ class GaitPlanner:
             self.gait = GAIT_TROT
 
 
-    def execute_step(self, steps, speed=None, increment=False, sleep_dur=0.15):
+    def execute_step(self, steps, speed=None, increment=False, sleep_dur=0):
         if increment:
             self.controller.change_pose(steps)
         else:
@@ -54,14 +54,14 @@ class GaitPlanner:
             self.execute_step(row, TROT_SPEED)
 
 
-    def raise_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def raise_leg(self, leg, angle=20, speed=None, sleep_dur=0):
         step = [0] * 12
         step[leg*3] = angle*(1 - 2*(leg%2))
         step[leg*3+1] = -1 * step[leg*3]
         self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
 
-    def swing_out(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def swing_out(self, leg, angle=20, speed=None, sleep_dur=0):
         step = [0] * 12
         if leg == 1 or leg == 2:
             step[leg*3+2] = angle
@@ -70,21 +70,21 @@ class GaitPlanner:
         self.execute_step(steps=step, speed=speed, increment=True, sleep_dur=sleep_dur)
 
 
-    def swing_in(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def swing_in(self, leg, angle=20, speed=None, sleep_dur=0):
         self.swing_out(leg, -angle, speed, sleep_dur)
 
 
-    def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def lower_leg(self, leg, angle=20, speed=None, sleep_dur=0):
         self.raise_leg(leg, -angle, speed, sleep_dur)
 
 
-    def sidestep_out(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def sidestep_out(self, leg, angle=20, speed=None, sleep_dur=0):
         self.raise_leg(leg, angle, speed, sleep_dur)
         self.swing_out(leg, angle, speed, sleep_dur)
         self.lower_leg(leg, angle, speed, sleep_dur)
 
 
-    def sidestep_in(self, leg, angle=20, speed=None, sleep_dur=0.15):
+    def sidestep_in(self, leg, angle=20, speed=None, sleep_dur=0):
         self.raise_leg(leg, angle, speed, sleep_dur)
         self.swing_in(leg, angle, speed, sleep_dur)
         self.lower_leg(leg, angle, speed, sleep_dur)
