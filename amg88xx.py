@@ -130,7 +130,6 @@ class AMG88XX:
             for col in range(self.AMG8833_PIXEL_ARRAY_WIDTH):
                 reg = AMG88XX_PIXEL_OFFSET + ((row * self.AMG8833_PIXEL_ARRAY_HEIGHT + col) << 1)
                 raw = self.read_bytes(reg, 2)
-                print(str(raw[1]) + ' , ' + str(raw[0]))
                 reading = raw[1] << 8 | raw[0]
                 pixels[row][col] = _twos_comp_to_float(reading) * self.AMG8833_PIXEL_TEMP_CONVERSION
 
