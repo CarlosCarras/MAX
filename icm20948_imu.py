@@ -315,8 +315,8 @@ class ICM20948:
     def get_accel_data(self):
         self.bank(0)
         data = self.read_bytes(ICM20948_USR0_ACCEL_XOUT_H, 6)
+        print(data)
         ax, ay, az = struct.unpack(">hhh", bytearray(data))
-        print('AX: ' + str(ax) + ', AY: ' + str(ay) + ', AZ: ' + str(az))
 
         self.bank(2)
         scale = (self.read(ICM20948_USR2_ACCEL_CONFIG) & 0x06) >> 1     # read accelerometer full scale range
