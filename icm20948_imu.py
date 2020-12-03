@@ -169,7 +169,6 @@ class ICM20948:
         self._bus = SMBus(bus)
         self.use_mag = use_mag
 
-        self.wake()
         if not self.read(ICM20948_USR0_WHO_AM_I) == ICM20948_CHIP_ID:
             raise RuntimeError("Unable to find ICM20948")
 
@@ -195,6 +194,8 @@ class ICM20948:
             while self.mag_read(AK09916_CNTL3) == 0x01:
                 time.sleep(0.0001)
 
+        self.wake()
+
 
     #----------------------------- I2C  Utilites -----------------------------#
 
@@ -219,7 +220,7 @@ class ICM20948:
         self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
         time.sleep(0.01)
-        self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
+        #self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
         self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
 
     def trigger_mag_io(self):
