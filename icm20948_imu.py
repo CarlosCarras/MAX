@@ -219,7 +219,8 @@ class ICM20948:
         self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
         time.sleep(0.01)
-        self.write(ICM20948_USR0_PWR_MGMT_2, 0x01)
+        self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
+        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
@@ -315,7 +316,6 @@ class ICM20948:
     def get_accel_data(self):
         self.bank(0)
         data = self.read_bytes(ICM20948_USR0_ACCEL_XOUT_H, 6)
-        print(data)
         ax, ay, az = struct.unpack(">hhh", bytearray(data))
 
         self.bank(2)
