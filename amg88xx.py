@@ -111,9 +111,7 @@ class AMG88XX:
         return self._bus.read_byte_data(self._address, register)
 
     def read_bytes(self, register, num_bytes):
-        data = self._bus.read_i2c_block_data(self._address, register, num_bytes)
-        print(data)
-        return data
+        return self._bus.read_i2c_block_data(self._address, register, num_bytes)
 
     # ------------------------------- AMG8833  --------------------------------#
     def get_temperature(self):
@@ -134,6 +132,7 @@ class AMG88XX:
                 raw = self.read_bytes(reg, 2)
                 print(str(raw[1]) + ' , ' + str(raw[0]))
                 reading = raw[1] << 8 | raw[0]
+                print(reading)
                 pixels[row][col] = _twos_comp_to_float(reading) * self.AMG8833_PIXEL_TEMP_CONVERSION
 
         return pixels
