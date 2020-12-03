@@ -65,7 +65,7 @@ class ThermalCam:
 
     def show(self):
         pixels = self.get_pixels()
-        print(pixels)print(pixels)
+        print(pixels)
         pixels = self.get_mapping(pixels)
 
         self.current_max_pixel_temp = 0
