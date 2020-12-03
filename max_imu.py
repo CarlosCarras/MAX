@@ -65,7 +65,7 @@ class IMU:
         gx_sum = gy_sum = gz_sum = 0
         roll_sum = pitch_sum = 0                # not using yaw for now
 
-        num_calibrations = 1000
+        num_calibrations = 100
         for i in range(num_calibrations):
             ax, ay, az = self.imu.get_accel_data()
             gx, gy, gz = self.imu.get_gyro_data()
