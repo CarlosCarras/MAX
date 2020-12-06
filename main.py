@@ -6,23 +6,13 @@ import gait_planner
 import trajectory_planner
 import max_imu
 import max_health
+import xbox
 import time
-
-
-stand_angles = [155.0,  35.0, 110.0,
-                 65.0, 180.0,  55.0,
-                140.0,  45.0, 145.0,
-                120.0, 160.0,  20.0]
-
-rest_angles = [225.0,   0.0, 110.0,
-                20.0, 220.0,  55.0,
-               200.0,  10.0, 145.0,
-                40.0, 205.0,  20.0]
 
 
 def initialize_servos(controller):
     for i in range(len(controller.motors)):
-        controller.attach_servo(stand_angles[i], rest_angles[i])
+        controller.attach_servo(gait_planner.STAND_ANGLES[i], gait_planner.REST_ANGLES[i])
 
 
 def main():
@@ -38,6 +28,12 @@ def main():
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
     calibrate_servos.calibrate(controller)
 
-    move.imu_test()
+    #move.imu_test()
+    joy = xbox.Joystick()
+
+    while not joy.Back():
+        move.step()
+    joy.close()
+
 
 main()
