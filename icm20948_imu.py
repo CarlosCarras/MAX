@@ -182,7 +182,7 @@ class ICM20948:
 
         self.bank(0)
         self.write(ICM20948_USR0_INT_PIN_CFG, 0x00)             # interrupts disabled
-        self.wake()
+        #self.wake()
 
         if self.use_mag:
             self.bank(3)
