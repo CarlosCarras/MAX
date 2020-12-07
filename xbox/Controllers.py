@@ -187,7 +187,7 @@ class Xbox360(Gamepad):
 
 
 class XboxOne(Gamepad):
-    fullName = 'Xbox 360 controller'
+    fullName = 'Xbox One controller'
 
     def __init__(self, joystickNumber = 0):
         Gamepad.__init__(self, joystickNumber)
