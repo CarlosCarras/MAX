@@ -162,7 +162,7 @@ class IMU:
         return self.roll, self.pitch, self.yaw
 
     def get_power_status(self):
-        data = self.imu.get_power_mgmt_1()
+        data = self.imu.get_power_mgmt(1)
         print("USER0 Power Management 1 Data: " + hex(data))
 
         clksel = data & 0b111
@@ -187,7 +187,24 @@ class IMU:
         if reset: print("Resetting.")
         else: print("False.")
 
+
+    def get_device_status(self):
+        data = self.imu.get_power_mgmt(2)
+
+        bm = 0b111
+        gyro = data & bm
+        accel = (data >> 3) & bm
+
+        if accel == bm: print("Accelerometer (all axes) disabled.")
+        elif accel == 0b000: print("Accelerometer (all axes) enabled.")
+        else: print("ERROR with the accelerometer configuration.")
+
+        if gyro == bm: print("Gyroscope (all axes) disabled.")
+        elif gyro == 0b000: print("Gyroscope (all axes) enabled.")
+        else: print("ERROR with the gyroscope configuration.")
+
         print('\n')
+
 
     def test(self, dur=30):
         start_time = time.time()
@@ -198,6 +215,7 @@ class IMU:
             print('AX: ' + str(ax) + ', AY: ' + str(ay) + ', AZ: ' + str(az))
             print('GX: ' + str(gx) + ', GY: ' + str(gy) + ', GZ: ' + str(gz))
             self.get_power_status()
+            self.get_device_status()
             time.sleep(0.75)
 
 
