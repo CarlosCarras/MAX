@@ -51,8 +51,8 @@ class Controller():
     def test(self):
         try:
             while self.running and self.gamepad.isConnected():
-                if self.gamepad.isPressed('A'): self.stand()
-                if self.gamepad.isPressed('B'): self.rest()
+                if self.gamepad.isPressed(2): self.stand()
+                if self.gamepad.isPressed(5): self.rest()
                 # update the joystick positions
                 #self.speed = -self.gamepad.axis(self.joystickSpeed)       # speed control (inverted)
                 #self.steering = self.gamepad.axis(self.joystickSteering)  # steering control (not inverted)
