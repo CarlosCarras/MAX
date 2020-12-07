@@ -31,8 +31,8 @@ class Controller():
         self.steering = 0.0
 
         self.gamepad.startBackgroundUpdates()
-        self.gamepad.addButtonPressedHandler(self.buttonStand, self.stand)
-        self.gamepad.addButtonPressedHandler(self.buttonRest, self.rest)
+        #self.gamepad.addButtonPressedHandler(self.buttonStand, stand)
+        #self.gamepad.addButtonPressedHandler(self.buttonRest, rest)
         self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
 
     def stand(self):
