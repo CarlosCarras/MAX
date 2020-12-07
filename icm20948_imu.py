@@ -392,3 +392,6 @@ class ICM20948:
             return ax, ay, az, gx, gy, gz, mx, my, mz, temperature
         else:
             return ax, ay, az, gx, gy, gz, temperature
+
+    def get_power_mgmt_1(self):
+        return self.read(ICM20948_USR0_PWR_MGMT_1)

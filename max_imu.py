@@ -132,8 +132,6 @@ class IMU:
     def get_rpy(self):
         ax, ay, az = self.imu.get_accel_data()
         gx, gy, gz = self.imu.get_gyro_data()
-        print('AX: ' + str(ax) + ', AY: ' + str(ay) + ', AZ: ' + str(az))
-        print('GX: ' + str(gx) + ', GY: ' + str(gy) + ', GZ: ' + str(gz))
         #mx, my, mz = self.imu.get_mag_data()
 
         current_time = time.time()                          # get current time (s)
@@ -163,6 +161,32 @@ class IMU:
 
         return self.roll, self.pitch, self.yaw
 
+    def get_power_status(self):
+        data = self.imu.get_power_mgmt_1()
+        print("USER0 Power Management 1 Data: " + hex(data))
+
+        clksel = data & 0b111
+        temp_dis = data & (1 <<  4)
+        sleep = data & (1 << 6)
+        reset = data & (1 << 6)
+
+        print("\tCLKSEL: ", end='')
+        if clksel> 0 and clksel < 6: print("Auto.")
+        if clksel == 7: print("The clock is stopped.")
+        else: print("Internal 20 MHz oscillator.")
+
+        print("\tTEMPDIS: ", end='')
+        if temp_dis: print("Disabled.")
+        else: print("Enabled.")
+
+        print("\tSLEEP: ", end='')
+        if sleep: print("On.")
+        else: print("Off.")
+
+        print("\tRESET: ", end='')
+        if reset: print("Resetting.")
+        else: print("False.")
+
     def test(self, dur=30):
         start_time = time.time()
 
@@ -171,6 +195,8 @@ class IMU:
             gx, gy, gz = self.imu.get_gyro_data()
             print('AX: ' + str(ax) + ', AY: ' + str(ay) + ', AZ: ' + str(az))
             print('GX: ' + str(gx) + ', GY: ' + str(gy) + ', GZ: ' + str(gz))
+            self.get_power_status()
             time.sleep(0.75)
+
 
 
