@@ -57,7 +57,7 @@ class Controller():
             if eventType == 'BUTTON':
                 if control == self.buttonStand:
                     if value:
-                        print(':)')
+                        self.stand()
                 if control == self.buttonRest:
                     if value:
-                        print(':(')
+                        self.rest()
