@@ -397,6 +397,7 @@ class Gamepad:
         This callback gets no parameters passed."""
         try:
             if buttonName in self.buttonIndex:
+                print(self.buttonIndex[buttonName])
                 buttonIndex = self.buttonIndex[buttonName]
             else:
                 buttonIndex = int(buttonName)
