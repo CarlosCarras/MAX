@@ -60,8 +60,8 @@ class GaitPlanner:
 
 
     def trot(self):
-        for row in TROT:
-            self.execute_step(row, TROT_SPEED)
+        for i in range(len(TROT)):
+            self.execute_step(TROT[i], TROT_SPEED[i])
 
 
     def raise_leg(self, leg, angle=20, speed=None, sleep_dur=0):
