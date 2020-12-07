@@ -218,8 +218,8 @@ class ICM20948:
     def wake(self):
         self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
-        time.sleep(0.01)
-        #self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)     ########### FIX
+        time.sleep(0.1)
+        self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)     ########### FIX
         self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)      # all devices on
 
     def trigger_mag_io(self):
