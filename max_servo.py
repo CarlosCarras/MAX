@@ -95,6 +95,7 @@ class MAXServo:
     def clk(self, speed=None):
         if not speed:
             speed = self.speed_scalar
+        else: print(speed)
 
         if not self.goal_reached():
             self.current_pose += self.get_direction() * self.joint_speed * speed
