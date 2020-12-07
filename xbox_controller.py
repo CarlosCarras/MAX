@@ -61,3 +61,4 @@ class Controller():
                 if control == self.buttonRest:
                     if value:
                         self.rest()
+            self.move.controller.update()
