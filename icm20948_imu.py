@@ -220,6 +220,7 @@ class ICM20948:
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
         while (self.read(ICM20948_USR0_PWR_MGMT_1) >> 7) & 1:
             time.sleep(0.001)
+        time.sleep(1)
 
         data = self.read(ICM20948_USR0_PWR_MGMT_1)
         data &= 0b10111111
