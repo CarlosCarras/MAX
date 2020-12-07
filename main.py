@@ -29,7 +29,8 @@ def main():
     #xbox = xbox_controller.Controller(move)
     calibrate_servos.calibrate(controller)
 
-    move.stand()
+
+    move.walk_forward(30)
     #move.stretch(dur=16)
     time.sleep(5)
     move.rest()
