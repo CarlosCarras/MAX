@@ -227,7 +227,7 @@ class IMU:
         self.roll_cntr += 0.001
         return np.sin(self.roll_cntr)
 
-    def test_get_pithc_data(self):
+    def test_get_pitch_data(self):
         self.pitch_cntr += 0.001
         return np.sin(self.pitch_cntr)
 
