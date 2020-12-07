@@ -29,9 +29,9 @@ def main():
     #xbox = xbox_controller.Controller(move)
     calibrate_servos.calibrate(controller)
 
-
+    move.stretch(dur=16)
+    time.sleep(5)
     move.walk_forward(30)
-    #move.stretch(dur=16)
     time.sleep(5)
     move.rest()
     # xbox.test()
