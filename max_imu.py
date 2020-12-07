@@ -168,7 +168,7 @@ class IMU:
         clksel = data & 0b111
         temp_dis = data & (1 <<  4)
         sleep = data & (1 << 6)
-        reset = data & (1 << 6)
+        reset = data & (1 << 7)
 
         print("\tCLKSEL: ", end='')
         if clksel> 0 and clksel < 6: print("Auto.")
