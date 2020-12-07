@@ -20,7 +20,7 @@ class Controller:
             print('Please Connect Your Xbox One Controller...')
             while not Gamepad.available():
                 time.sleep(1.0)
-        gamepad = self.gamepadType()
+        self.gamepad = self.gamepadType()
         print('Xbox One Controller Connected!')
 
         self.running = True
