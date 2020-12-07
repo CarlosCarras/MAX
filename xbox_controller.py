@@ -45,7 +45,7 @@ class Controller():
 
     def exitButtonPressed(self):
         self.running = False
-        print(':)')
+        print(":)")
         exit()
 
     def test(self):
