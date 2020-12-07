@@ -316,7 +316,6 @@ class ICM20948:
     def get_accel_data(self):
         self.bank(0)
         data = self.read_bytes(ICM20948_USR0_ACCEL_XOUT_H, 6)
-        print(data)
         ax, ay, az = struct.unpack(">hhh", bytearray(data))
 
         self.bank(2)
