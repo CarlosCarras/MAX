@@ -250,6 +250,7 @@ class Gamepad:
             else:
                 finalValue = True
                 self.wasPressedMap[index] = True
+                print(self.pressedEventMap)
                 for callback in self.pressedEventMap[index]:
                     callback()
             self.pressedMap[index] = finalValue
