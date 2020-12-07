@@ -182,7 +182,7 @@ class ICM20948:
 
         self.bank(0)
         self.write(ICM20948_USR0_INT_PIN_CFG, 0x00)             # interrupts disabled
-        self.wake()
+        #self.wake()
 
         if self.use_mag:
             self.bank(3)
@@ -212,7 +212,6 @@ class ICM20948:
     def bank(self, bank_num):
         """ selects the user bank [0-3] """
         if not self.bank == bank_num:
-            time.sleep(0.01)
             self.write(ICM20948_BANK_SEL, bank_num << 4)
             self._bank = bank_num
             time.sleep(0.01)
