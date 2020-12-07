@@ -97,6 +97,7 @@ class MAXServo:
             speed = self.speed_scalar
 
         if not self.goal_reached():
+            print(speed)
             self.current_pose += self.get_direction() * self.joint_speed * speed
         else:
             self.current_pose = self.goal_pose
