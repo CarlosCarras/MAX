@@ -43,7 +43,7 @@ def main():
     #health.status()
 
     input('Press [Enter] to test Thermal.')
-    thermal_cam.test()
+    camera.test()
 
 
 
