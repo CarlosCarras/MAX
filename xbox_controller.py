@@ -8,7 +8,7 @@ from xbox import Gamepad
 class Controller():
 
     buttonStand = 'X'
-    buttonRest = 'Y'
+    buttonRest = 'RB'
     buttonExit = 'XBOX'
     joystickSpeed = 'LEFT-Y'
     joystickSteering = 'RIGHT-X'
@@ -32,7 +32,7 @@ class Controller():
 
         self.gamepad.startBackgroundUpdates()
         self.gamepad.addButtonPressedHandler(self.buttonStand, self.stand)
-        #self.gamepad.addButtonPressedHandler(self.buttonRest, self.rest)
+        self.gamepad.addButtonPressedHandler(self.buttonRest, self.rest)
         self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
 
     def stand(self):
