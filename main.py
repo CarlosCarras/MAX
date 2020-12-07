@@ -26,17 +26,25 @@ def main():
 
     move = gait_planner.GaitPlanner(controller, imu)
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
-    #xbox = xbox_controller.Controller(move)
+    xbox = xbox_controller.Controller(move)
     calibrate_servos.calibrate(controller)
 
-    move.stretch(16)
-    time.sleep(5)
-    move.walk_forward(30)
+    move.stand()
     time.sleep(5)
     move.rest()
-    # xbox.test()
-    # move.imu_test()
-    # imu.test_software_in_loop_pitch()
+
+    input('Press [Enter] to start walking.')
+
+    move.walk_forward(30)
+    health.status()
+
+    input('Press [Enter] to test Xbox.')
+    xbox.test(30)
+    health.status()
+
+    input('Press [Enter] to test Thermal.')
+    perception.point_hotspot()
+
 
 
 main()
