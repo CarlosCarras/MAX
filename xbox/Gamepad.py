@@ -396,10 +396,11 @@ class Gamepad:
         """Adds a callback for when a specific button specified by name or index is pressed.
         This callback gets no parameters passed."""
         try:
-            print(self.buttonIndex[buttonName])
             if buttonName in self.buttonIndex:
+                print('IT WORKED!')
                 buttonIndex = self.buttonIndex[buttonName]
             else:
+                print('IT DID NOT WORK')
                 buttonIndex = int(buttonName)
             if callback not in self.pressedEventMap[buttonIndex]:
                 self.pressedEventMap[buttonIndex].append(callback)
