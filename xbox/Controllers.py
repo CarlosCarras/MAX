@@ -202,9 +202,9 @@ class XboxOne(Gamepad):
         self.buttonNames = {
             0:  'A',
             1:  'B',
-            2:  'X',
-            3:  'Y',
-            4:  'LB',
+            2:  'N',
+            3:  'X',
+            4:  'Y',
             5:  'RB',
             6:  'BACK',
             7:  'START',
