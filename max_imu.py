@@ -53,6 +53,11 @@ class IMU:
         self.calibrate_imu()
         #self.calibrate_magnetometer()
 
+        # Software In the Loop:
+        self.roll_cntr = 0
+        self.pitch_cntr = 0
+
+
     def get_temperature(self):
         return self.imu.get_temperature()
 
@@ -217,6 +222,30 @@ class IMU:
             self.get_power_status()
             self.get_device_status()
             time.sleep(1)
+
+    def test_get_roll_data(self):
+        self.roll_cntr += 0.001
+        return np.sin(self.roll_cntr)
+
+    def test_get_pithc_data(self):
+        self.pitch_cntr += 0.001
+        return np.sin(self.pitch_cntr)
+
+    def test_software_in_loop_roll(self, dur=20):
+        start_time = time.time()
+        while time.time() - start_time < dur/2:
+            roll, pitch, yaw = [self.test_get_roll_data(), 0, 0]
+        return roll, pitch, yaw
+
+    def test_software_in_loop_pitch(self, dur=20):
+        start_time = time.time()
+        while time.time() - start_time < dur/2:
+            roll, pitch, yaw = [0, self.test_get_pitch_data(), 0]
+        return roll, pitch, yaw
+
+
+
+
 
 
 
