@@ -43,7 +43,7 @@ def main():
     #health.status()
 
     input('Press [Enter] to test Thermal.')
-    camera.test()
+    perception.track_hotspot(30)
 
 
 
