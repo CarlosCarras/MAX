@@ -182,7 +182,7 @@ class ICM20948:
 
         self.bank(0)
         self.write(ICM20948_USR0_INT_PIN_CFG, 0x00)             # interrupts disabled
-        #self.wake()
+        self.wake()
 
         if self.use_mag:
             self.bank(3)
@@ -226,8 +226,10 @@ class ICM20948:
     def wake(self):
         self.bank(0)
         data = self.read(ICM20948_USR0_PWR_MGMT_1) & 0b10111111
+        print("0b"+"{0:b}".format(data))
         self.write(ICM20948_USR0_PWR_MGMT_1, data)
         self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
+        time.sleep(0.035)                           # maximum gyroscope startup time (pp. 11)
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
