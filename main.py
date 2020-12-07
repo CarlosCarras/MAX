@@ -33,10 +33,10 @@ def main():
     time.sleep(5)
     move.rest()
 
-    input('Press [Enter] to start walking.')
+    #input('Press [Enter] to start walking.')
 
-    move.walk_forward(30)
-    health.status()
+    #move.walk_forward(30)
+    #health.status()
 
     input('Press [Enter] to test Xbox.')
     xbox.test(30)
