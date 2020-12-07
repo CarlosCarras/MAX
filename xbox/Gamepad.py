@@ -95,12 +95,12 @@ class Gamepad:
         for index in self.buttonNames:
             self.buttonIndex[self.buttonNames[index]] = index
             self.pressedEventMap[index] = []
-            self.pressedMap[index] = []
+            self.changedEventMap[index] = []
 
         for index in self.axisNames:
             self.axisIndex[self.axisNames[index]] = index
             self.pressedEventMap[index] = []
-            self.pressedMap[index] = []
+            self.changedEventMap[index] = []
 
 
     def _getNextEventRaw(self):
