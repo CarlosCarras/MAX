@@ -26,16 +26,16 @@ def main():
 
     move = gait_planner.GaitPlanner(controller, imu)
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
-    xbox = xbox_controller.Controller(move)
+    #xbox = xbox_controller.Controller(move)
     calibrate_servos.calibrate(controller)
 
-    move.rest()
-    move.stretch(dur=16)
-    time.sleep(5)
-    move.walk_forward(dur=16)
+    #move.rest()
+    #move.stretch(dur=16)
+    #time.sleep(5)
+    #move.walk_forward(dur=16)
     # xbox.test()
     # move.imu_test()
-    # joy = xbox.Joystick()
+    imu.test()
 
 
 main()
