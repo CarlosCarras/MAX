@@ -425,6 +425,7 @@ class Gamepad:
         """Adds a callback for when a specific button specified by name or index is released.
         This callback gets no parameters passed."""
         try:
+            print(self.buttonIndex)
             if buttonName in self.buttonIndex:
                 buttonIndex = self.buttonIndex[buttonName]
             else:
