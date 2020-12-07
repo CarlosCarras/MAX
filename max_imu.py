@@ -216,7 +216,7 @@ class IMU:
             print('GX: ' + str(gx) + ', GY: ' + str(gy) + ', GZ: ' + str(gz))
             self.get_power_status()
             self.get_device_status()
-            time.sleep(0.75)
+            time.sleep(1)
 
 
 
