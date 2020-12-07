@@ -201,7 +201,7 @@ class ICM20948:
 
     def write(self, register, data):
         self._bus.write_byte_data(self._address, register, data)
-        time.sleep(0.0001)
+        time.sleep(0.001)
 
     def read(self, register):
         return self._bus.read_byte_data(self._address, register)
