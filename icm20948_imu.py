@@ -394,6 +394,7 @@ class ICM20948:
             return ax, ay, az, gx, gy, gz, temperature
 
     def get_power_mgmt(self, num):
+        self.bank(0)
         register = 0
         if num == 1:
             register = self.read(ICM20948_USR0_PWR_MGMT_1)
