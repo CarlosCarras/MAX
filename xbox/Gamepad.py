@@ -100,9 +100,7 @@ class Gamepad:
 
         for index in self.axisNames:
             self.axisIndex[self.axisNames[index]] = index
-            self.pressedEventMap[index] = []
-            self.releasedEventMap[index] = []
-            self.changedEventMap[index] = []
+            self.movedEventMap[index] = []
 
 
     def _getNextEventRaw(self):

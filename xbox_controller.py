@@ -48,15 +48,16 @@ class Controller():
         print(":)")
         exit()
 
-    def test(self):
-        try:
-            while self.running and self.gamepad.isConnected():
-                if self.gamepad.isPressed(2): self.stand()
-                if self.gamepad.isPressed(5): self.rest()
-                # update the joystick positions
-                #self.speed = -self.gamepad.axis(self.joystickSpeed)       # speed control (inverted)
-                #self.steering = self.gamepad.axis(self.joystickSteering)  # steering control (not inverted)
-                #print('%+.1f %% speed, %+.1f %% steering' % (self.speed * 100, self.steering * 100))
-                time.sleep(self.pollInterval)
-        finally:
-            self.gamepad.disconnect()                     # ensure the background thread is always terminated when done
+    def test(self, dur=None):
+        if dur is None: dur = 60
+        start_time = time.time()
+
+        while self.gamepad.isConnected() and time.time()-start_time < dur:
+            eventType, control, value = self.gamepad.getNextEvent()
+            if eventType == 'BUTTON':
+                if control == self.buttonStand:
+                    if value:
+                        print(':)')
+                if control == self.buttonRest:
+                    if value:
+                        print(':(')
