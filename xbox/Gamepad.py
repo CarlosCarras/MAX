@@ -401,7 +401,7 @@ class Gamepad:
             else:
                 buttonIndex = int(buttonName)
             if callback not in self.pressedEventMap[buttonIndex]:
-                print(buttonIndex)
+                print(self.pressedEventMap)
                 self.pressedEventMap[buttonIndex].append(callback)
         except KeyError:
             raise ValueError('Button %i was not found' % buttonIndex)
