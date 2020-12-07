@@ -5,13 +5,17 @@ import time
 from xbox import Gamepad
 
 
-class Controller:
+class Controller():
 
+    buttonStand = 'A'
+    buttonRest = 'B'
     buttonExit = 'XBOX'
-    #joystickSpeed = 'LEFT-Y'
+    joystickSpeed = 'LEFT-Y'
     joystickSteering = 'RIGHT-X'
 
-    def __init__(self):
+    def __init__(self, controller):
+        self.move = controller
+
         self.gamepad = Gamepad.Gamepad()
         self.gamepadType = Gamepad.XboxOne
         self.pollInterval = 0.1
@@ -27,19 +31,22 @@ class Controller:
         self.speed = 0.0
         self.steering = 0.0
 
-    def happyButtonPressed(self):
-        print(':)')
+        self.gamepad.startBackgroundUpdates()
+        self.gamepad.addButtonReleasedHandler(self.buttonStand, self.stand)
+        self.gamepad.addButtonReleasedHandler(self.buttonRest, self.rest)
+        self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
 
-    def happyButtonReleased(self):
-        print(':(')
+    def stand(self):
+        self.move.stand()
+        print('MAX is standing.')
+
+    def rest(self):
+        self.move.rest()
+        print('MAX is resting.')
 
     def exitButtonPressed(self):
-        print('EXIT')
         self.running = False
-
-        self.gamepad.startBackgroundUpdates()
-
-        self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
+        exit()
 
     def test(self):
         try:
