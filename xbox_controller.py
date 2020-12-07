@@ -36,7 +36,7 @@ class Controller:
     def exitButtonPressed(self):
         global running
         print('EXIT')
-        running = False
+        self.running = False
 
         self.gamepad.startBackgroundUpdates()
 
@@ -44,7 +44,7 @@ class Controller:
 
     def test(self):
         try:
-            while running and self.gamepad.isConnected():
+            while self.running and self.gamepad.isConnected():
                 # update the joystick positions
                 self.speed = -self.gamepad.axis(self.joystickSpeed)       # speed control (inverted)
                 self.steering = self.gamepad.axis(self.joystickSteering)  # steering control (not inverted)
