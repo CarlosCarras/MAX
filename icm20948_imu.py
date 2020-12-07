@@ -180,8 +180,11 @@ class ICM20948:
         self.set_accel_low_pass(enabled=True, mode=5)
         self.set_accel_scale(16)
 
+
         self.bank(0)
-        self.write(ICM20948_USR0_INT_PIN_CFG, 0x30)
+        self.write(ICM20948_USR0_INT_PIN_CFG, 0x00)             # interrupts disabled
+        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)              # all devices on
+
 
         if self.use_mag:
             self.bank(3)
