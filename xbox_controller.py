@@ -16,7 +16,6 @@ class Controller():
     def __init__(self, controller):
         self.move = controller
 
-        self.gamepad = Gamepad.Gamepad()
         self.gamepadType = Gamepad.XboxOne
         self.pollInterval = 0.1
 
@@ -24,7 +23,7 @@ class Controller():
             print('\nPlease Connect Your Xbox One Controller...')
             while not Gamepad.available():
                 time.sleep(1.0)
-        self.gamepad = self.gamepadType()
+        self.gamepad = self.gamepadType
         print('\nXbox One Controller Connected! ')
 
         self.running = True
@@ -32,8 +31,8 @@ class Controller():
         self.steering = 0.0
 
         self.gamepad.startBackgroundUpdates()
-        self.gamepad.addButtonReleasedHandler(self.buttonStand, self.stand)
-        self.gamepad.addButtonReleasedHandler(self.buttonRest, self.rest)
+        self.gamepad.addButtonPressedHandler(self.buttonStand, self.stand)
+        self.gamepad.addButtonPressedHandler(self.buttonRest, self.rest)
         self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
 
     def stand(self):
