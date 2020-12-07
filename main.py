@@ -29,10 +29,10 @@ def main():
     #xbox = xbox_controller.Controller(move)
     calibrate_servos.calibrate(controller)
 
-    move.rest()
+    move.stand()
     #move.stretch(dur=16)
     time.sleep(5)
-    move.stand()
+    move.rest()
     # xbox.test()
     # move.imu_test()
     # imu.test_software_in_loop_pitch()
