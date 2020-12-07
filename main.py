@@ -6,7 +6,6 @@ import gait_planner
 import trajectory_planner
 import max_imu
 import max_health
-#import xbox
 import time
 
 
