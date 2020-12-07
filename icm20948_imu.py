@@ -218,7 +218,8 @@ class ICM20948:
     def wake(self):
         self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
-        time.sleep(0.1)
+        while (self.read(ICM20948_USR0_PWR_MGMT_1) >> 7) & 1:
+            time.sleep(0.001)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)     ########### FIX
         self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)      # all devices on
 
