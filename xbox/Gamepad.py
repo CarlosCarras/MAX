@@ -397,11 +397,11 @@ class Gamepad:
         This callback gets no parameters passed."""
         try:
             if buttonName in self.buttonIndex:
-                print(self.buttonIndex[buttonName])
                 buttonIndex = self.buttonIndex[buttonName]
             else:
                 buttonIndex = int(buttonName)
             if callback not in self.pressedEventMap[buttonIndex]:
+                print(buttonIndex)
                 self.pressedEventMap[buttonIndex].append(callback)
         except KeyError:
             raise ValueError('Button %i was not found' % buttonIndex)
