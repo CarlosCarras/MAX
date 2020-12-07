@@ -171,6 +171,7 @@ class ICM20948:
         
         self.restart()
         if not self.read(ICM20948_USR0_WHO_AM_I) == ICM20948_CHIP_ID:
+            print(self.read(ICM20948_USR0_WHO_AM_I))
             raise RuntimeError("Unable to find ICM20948")
 
         self.set_gyro_sample_rate(100)
@@ -223,6 +224,7 @@ class ICM20948:
             time.sleep(0.001)
 
     def wake(self):
+        self.bank(0)
         data = self.read(ICM20948_USR0_PWR_MGMT_1) & 0b10111111
         self.write(ICM20948_USR0_PWR_MGMT_1, data)
         self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
