@@ -60,6 +60,32 @@ class GaitPlanner:
         return steps
 
 
+    def stand(self, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
+
+        #stand_angles = self.correct(STAND_ANGLES)
+        #self.controller.set_pose(stand_angles)
+        self.controller.stand()
+        self.controller.update_simultaneously()
+
+        if speed:
+            self.controller.set_speed(original_speed)
+
+
+    def rest(self, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
+
+        self.controller.rest()
+        self.controller.update_simultaneously()
+
+        if speed:
+            self.controller.set_speed(original_speed)
+
+
     def set_gait(self, gait):
         if gait is GAIT_TROT:
             self.gait = GAIT_TROT
@@ -162,36 +188,11 @@ class GaitPlanner:
         while time.time() - start < dur:
             self.step_right()
 
+
     def walk_left(self, dur):
         start = time.time()
         while time.time() - start < dur:
             self.step_left()
-
-
-    def stand(self, speed=None):
-        if speed:
-            original_speed = self.controller.get_speed()
-            self.controller.set_speed(speed)
-
-        #stand_angles = self.correct(STAND_ANGLES)
-        #self.controller.set_pose(stand_angles)
-        self.controller.stand()
-        self.controller.update_simultaneously()
-
-        if speed:
-            self.controller.set_speed(original_speed)
-
-
-    def rest(self, speed=None):
-        if speed:
-            original_speed = self.controller.get_speed()
-            self.controller.set_speed(speed)
-
-        self.controller.rest()
-        self.controller.update_simultaneously()
-
-        if speed:
-            self.controller.set_speed(original_speed)
 
 
     def set_pitch(self, pitch, speed=None):
