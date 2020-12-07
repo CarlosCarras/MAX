@@ -180,11 +180,8 @@ class ICM20948:
         self.set_accel_low_pass(enabled=True, mode=5)
         self.set_accel_scale(16)
 
-
         self.bank(0)
         self.write(ICM20948_USR0_INT_PIN_CFG, 0x00)             # interrupts disabled
-        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)              # all devices on
-
 
         if self.use_mag:
             self.bank(3)
@@ -222,8 +219,8 @@ class ICM20948:
         self.bank(0)
         self.write(ICM20948_USR0_PWR_MGMT_1, 0x80)
         time.sleep(0.01)
-        #self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
-        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)
+        self.write(ICM20948_USR0_PWR_MGMT_1, 0x01)
+        self.write(ICM20948_USR0_PWR_MGMT_2, 0x00)      # all devices on
 
     def trigger_mag_io(self):
         """ allows magnetometer to become master on the auxiliary i2c bus to execute commands """
