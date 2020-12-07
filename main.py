@@ -29,7 +29,7 @@ def main():
     xbox = xbox_controller.Controller(move)
     calibrate_servos.calibrate(controller)
 
-    xbox.test()
+    # xbox.test()
     # move.imu_test()
     # joy = xbox.Joystick()
 
