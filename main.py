@@ -6,6 +6,7 @@ import gait_planner
 import trajectory_planner
 import max_imu
 import max_health
+import xbox_controller
 import time
 
 
@@ -25,13 +26,12 @@ def main():
 
     move = gait_planner.GaitPlanner(controller, imu)
     perception = trajectory_planner.TrajectoryPlanner(camera, move)
+    controller = xbox_controller.Controller()
     calibrate_servos.calibrate(controller)
 
+    controller.test()
     # move.imu_test()
     # joy = xbox.Joystick()
 
-    # while not joy.Back():
-    #     move.step()
-    # joy.close()
 
 main()
