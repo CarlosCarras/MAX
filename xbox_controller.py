@@ -57,8 +57,9 @@ class Controller():
             if eventType == 'BUTTON':
                 if control == self.buttonStand:
                     if value:
-                        self.stand()
+                        self.move.stand(speed=0.005)
+                        print('MAX is standing.')
                 if control == self.buttonRest:
                     if value:
-                        self.rest()
-            self.move.controller.update()
+                        self.move.rest(speed=0.005)
+                        print('MAX is resting.')

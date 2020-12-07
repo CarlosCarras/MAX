@@ -149,14 +149,28 @@ class GaitPlanner:
         while time.time() - start < dur:
             self.step_left()
 
-    def stand(self):
+    def stand(self, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
+
         self.controller.stand()
         self.controller.update()
 
+        if speed:
+            self.controller.set_speed(original_speed)
 
-    def rest(self):
+
+    def rest(self, speed=None):
+        if speed:
+            original_speed = self.controller.get_speed()
+            self.controller.set_speed(speed)
+
         self.controller.rest()
         self.controller.update()
+
+        if speed:
+            self.controller.set_speed(original_speed)
 
 
     def set_pitch(self, pitch, speed=None):
