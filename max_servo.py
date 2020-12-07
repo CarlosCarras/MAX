@@ -38,7 +38,7 @@ class MAXServo:
         self.goal_pose = self.stand_angle       # deg
         self.current_pose = self.stand_angle    # deg
         self.joint_speed = 90.0                 # deg/sec
-        self.speed_scalar = 0.01
+        self.speed_scalar = 0.005
 
         self.controller = controller
         self.set_pwm()
