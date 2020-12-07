@@ -7,8 +7,8 @@ from xbox import Gamepad
 
 class Controller():
 
-    buttonStand = 'X'
-    buttonRest = 'RB'
+    buttonStand = 'A'
+    buttonRest = 'B'
     buttonExit = 'XBOX'
     joystickSpeed = 'LEFT-Y'
     joystickSteering = 'RIGHT-X'
@@ -31,9 +31,9 @@ class Controller():
         self.steering = 0.0
 
         self.gamepad.startBackgroundUpdates()
-        self.gamepad.addButtonPressedHandler(self.buttonStand, self.stand)
-        self.gamepad.addButtonPressedHandler(self.buttonRest, self.rest)
-        self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
+        #self.gamepad.addButtonPressedHandler(self.buttonStand, self.stand)
+        #self.gamepad.addButtonPressedHandler(self.buttonRest, self.rest)
+        #self.gamepad.addButtonPressedHandler(self.buttonExit, self.exitButtonPressed)
 
     def stand(self):
         self.move.stand()
@@ -51,6 +51,8 @@ class Controller():
     def test(self):
         try:
             while self.running and self.gamepad.isConnected():
+                if self.gamepad.isPressed('A'): self.stand()
+                if self.gamepad.isPressed('B'): self.rest()
                 # update the joystick positions
                 #self.speed = -self.gamepad.axis(self.joystickSpeed)       # speed control (inverted)
                 #self.steering = self.gamepad.axis(self.joystickSteering)  # steering control (not inverted)
