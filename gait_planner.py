@@ -174,6 +174,7 @@ class GaitPlanner:
             self.controller.set_speed(speed)
 
         self.controller.stand()
+        self.controller.correct()
         self.controller.update()
 
         if speed:

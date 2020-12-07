@@ -32,7 +32,7 @@ def main():
     move.rest()
     #move.stretch(dur=16)
     time.sleep(5)
-    move.walk_forward(dur=16)
+    move.stand()
     # xbox.test()
     # move.imu_test()
     # imu.test_software_in_loop_pitch()
