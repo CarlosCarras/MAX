@@ -400,7 +400,7 @@ class ICM20948:
         self.bank(0)
         register = 0
         if num == 1:
-            register = self.read(ICM20948_USR0_PWR_MGMT_1)
+            register = ICM20948_USR0_PWR_MGMT_1
         elif num == 2:
-            register = self.read(ICM20948_USR0_PWR_MGMT_2)
+            register = ICM20948_USR0_PWR_MGMT_2
         return self.read(register)
