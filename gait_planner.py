@@ -173,8 +173,8 @@ class GaitPlanner:
             original_speed = self.controller.get_speed()
             self.controller.set_speed(speed)
 
-        self.controller.stand()
-        self.controller.correct()
+        stand_angles = self.correct(STAND_ANGLES)
+        self.controller.set_pose(stand_angles)
         self.controller.update()
 
         if speed:
