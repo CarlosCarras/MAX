@@ -38,11 +38,6 @@ def main():
     move.walk_forward(30)
     health.status()
 
-    input('Press [Enter] to Correct.')
-    move.walk_right(5)
-    move.walk_left(5)
-    health.status()
-
     input('Press [Enter] to test Xbox.')
     xbox.test(30)
     health.status()
