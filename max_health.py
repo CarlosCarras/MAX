@@ -25,7 +25,7 @@ class HealthCheck():
         camera_temp = self.camera.get_temperature()
 
         print('IMU Temperature:' + str(imu_temp))
-        print('Camera Temperature:' + str(camera_temp))
+        print('Camera Temperature:' + str(camera_temp+10))
 
         if imu_temp > IMU_MAX_TEMP:
             print('Initiating Shutdown Procedure:  The ICM20948 Temperature Exceeded the Allowable Limit.')
