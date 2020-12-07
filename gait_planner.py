@@ -63,10 +63,7 @@ class GaitPlanner:
     def stand(self, speed=None):
         if speed:
             original_speed = self.controller.get_speed()
-            new_speed = speed
-        else:
-            new_speed = self.controller.servos[0].get_speed()
-        self.controller.set_speed(new_speed)
+            self.controller.set_speed(speed)
 
         #stand_angles = self.correct(STAND_ANGLES)
         #self.controller.set_pose(stand_angles)
@@ -80,10 +77,7 @@ class GaitPlanner:
     def rest(self, speed=None):
         if speed:
             original_speed = self.controller.get_speed()
-            new_speed = speed
-        else:
-            new_speed = self.controller.servos[0].get_speed()
-        self.controller.set_speed(new_speed)
+            self.controller.set_speed(speed)
 
         self.controller.rest()
         self.controller.update_simultaneously()
