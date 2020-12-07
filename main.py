@@ -38,12 +38,12 @@ def main():
     #move.walk_forward(30)
     #health.status()
 
-    input('Press [Enter] to test Xbox.')
-    xbox.test(30)
-    health.status()
+    #input('Press [Enter] to test Xbox.')
+    #xbox.test(30)
+    #health.status()
 
     input('Press [Enter] to test Thermal.')
-    perception.track_hotspot(30)
+    thermal_cam.test()
 
 
 
