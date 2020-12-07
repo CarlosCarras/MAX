@@ -38,7 +38,7 @@ class MAXServo:
         self.goal_pose = self.stand_angle       # deg
         self.current_pose = self.stand_angle    # deg
         self.joint_speed = 90.0                 # deg/sec
-        self.speed_scalar = 0.005
+        self.speed_scalar = 0.01
 
         self.controller = controller
         self.set_pwm()
@@ -95,7 +95,6 @@ class MAXServo:
     def clk(self, speed=None):
         if not speed:
             speed = self.speed_scalar
-        else: print(speed)
 
         if not self.goal_reached():
             self.current_pose += self.get_direction() * self.joint_speed * speed
