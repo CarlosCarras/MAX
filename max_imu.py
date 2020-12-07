@@ -175,7 +175,7 @@ class IMU:
         if clksel == 7: print("The clock is stopped.")
         else: print("Internal 20 MHz oscillator.")
 
-        print("\tTEMPDIS: ", end='')
+        print("\tTEMP: ", end='')
         if temp_dis: print("Disabled.")
         else: print("Enabled.")
 
@@ -186,6 +186,8 @@ class IMU:
         print("\tRESET: ", end='')
         if reset: print("Resetting.")
         else: print("False.")
+
+        print('\n')
 
     def test(self, dur=30):
         start_time = time.time()
