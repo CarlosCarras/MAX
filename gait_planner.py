@@ -173,9 +173,10 @@ class GaitPlanner:
             original_speed = self.controller.get_speed()
             self.controller.set_speed(speed)
 
-        stand_angles = self.correct(STAND_ANGLES)
-        self.controller.set_pose(stand_angles)
-        self.controller.update()
+        #stand_angles = self.correct(STAND_ANGLES)
+        #self.controller.set_pose(stand_angles)
+        self.controller.stand()
+        self.controller.update_simultaneously()
 
         if speed:
             self.controller.set_speed(original_speed)
@@ -187,7 +188,7 @@ class GaitPlanner:
             self.controller.set_speed(speed)
 
         self.controller.rest()
-        self.controller.update()
+        self.controller.update_simultaneously()
 
         if speed:
             self.controller.set_speed(original_speed)
@@ -201,7 +202,7 @@ class GaitPlanner:
         motors = [1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0]    # motors and directions to actuate
         motors = [i*pitch for i in motors]
         self.controller.change_pose(motors)
-        self.controller.update()
+        self.controller.update_simultaneously()
 
         if speed:
             self.controller.set_speed(original_speed)
@@ -215,16 +216,15 @@ class GaitPlanner:
         motors = [1, -1, 0, -1, 1, 0, 1, -1, 0, -1, 1, 0]    # motors to actuate
         motors = [i*height for i in motors]
         self.controller.change_pose(motors)
-        self.controller.update()
+        self.controller.update_simultaneously()
 
         if speed:
             self.controller.set_speed(original_speed)
 
 
     def stretch(self, dur=16, deg=20, speed=None):
-        sleep_time = dur/8
+        sleep_time = dur/7
 
-        time.sleep(sleep_time)
         self.stand()
         time.sleep(sleep_time)
         self.set_height(deg)
