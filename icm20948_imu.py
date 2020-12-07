@@ -212,8 +212,8 @@ class ICM20948:
     def bank(self, bank_num):
         """ selects the user bank [0-3] """
         if not self.bank == bank_num:
-            self.write(ICM20948_BANK_SEL, bank_num << 4)
             time.sleep(0.01)
+            self.write(ICM20948_BANK_SEL, bank_num << 4)
             self._bank = bank_num
             time.sleep(0.01)
 
