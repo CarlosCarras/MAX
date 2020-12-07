@@ -197,11 +197,11 @@ class IMU:
 
         if accel == bm: print("Accelerometer (all axes) disabled.")
         elif accel == 0b000: print("Accelerometer (all axes) enabled.")
-        else: print("ERROR with the accelerometer configuration.")
+        else: print("ERROR with the accelerometer configuration: " + "{0:b}".format(accel))
 
         if gyro == bm: print("Gyroscope (all axes) disabled.")
         elif gyro == 0b000: print("Gyroscope (all axes) enabled.")
-        else: print("ERROR with the gyroscope configuration.")
+        else: print("ERROR with the gyroscope configuration: " + "{0:b}".format(gyro))
 
         print('\n')
 
