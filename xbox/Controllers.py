@@ -194,23 +194,21 @@ class XboxOne(Gamepad):
         self.axisNames = {
             0: 'LEFT-X',
             1: 'LEFT-Y',
-            2: 'LT',
-            3: 'RIGHT-X',
-            4: 'RIGHT-Y',
-            5: 'RT'
+            2: 'RIGHT-X',
+            3: 'RIGHT-Y',
+            4: 'RT',
+            5: 'LT',
+            6: 'DP-X',
+            7: 'DP-Y'
         }
         self.buttonNames = {
             0:  'A',
             1:  'B',
-            2:  'X',
-            3:  'Y',
-            4:  'LB',
-            5:  'RB',
-            6:  'BACK',
-            7:  'START',
-            8:  'XBOX',
-            9:  'LA',
-            10: 'RA'
+            3:  'X',
+            4:  'Y',
+            6:  'LB',
+            7:  'RB',
+            10: 'MENU'
         }
         self._setupReverseMaps()
 
